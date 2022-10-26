@@ -8,6 +8,7 @@ import {
   ScrollView,
   Button,
 } from "native-base";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Image,
@@ -19,11 +20,43 @@ import { responsiveWidth } from "react-native-responsive-dimensions";
 import GoBack from "./goback";
 import Header from "./header"
 
+const listData = [1,2,3,4,5,6,7,8];
 
 const Details = () => {
 
-  const onViewDetail = () => {
+  const currentIndex = useRef(0);
+  const [active, setActive] = useState(0);
+  const listRef = useRef();
 
+  const previousSlide = () => {
+    if (currentIndex.current === 0) {
+      return;
+    }
+  
+    if (listRef.current) {
+      currentIndex.current = currentIndex.current - 1
+      listRef.current.scrollToIndex({
+        animated: true,
+        index: currentIndex.current,
+      });
+
+      setActive(currentIndex.current)
+    }
+  }
+  const nextSlide = () => {
+    if (currentIndex.current === (listData.length - 1)) {
+      return;
+    }
+  
+    if (listRef.current) {
+      currentIndex.current = currentIndex.current + 1
+      listRef.current.scrollToIndex({
+        animated: true,
+        index: currentIndex.current,
+      });
+
+      setActive(currentIndex.current)
+    }
   }
 
   return (
@@ -59,13 +92,15 @@ const Details = () => {
 
       <Box flex={1}>
         <FlatList
+          ref={listRef}
           horizontal
           pagingEnabled
           decelerationRate={'fast'}
           keyExtractor={(t, i) => `t${i}`}
           snapToInterval={responsiveWidth(100)}
           showsHorizontalScrollIndicator={false}
-          data={[1,2,3,4,5,6,7,8]}
+          data={listData}
+          
           renderItem={({ item }) => {
             return (
               <Box p={4} flex={1} w={responsiveWidth(100)}>
@@ -95,6 +130,45 @@ const Details = () => {
             )
           }}
         />
+      </Box>
+      <Box h={100} p={4} flexDirection='row'>
+        <Box justifyContent={'center'} backgroundColor={'#BFDCEB'} rounded='sm'>
+          <TouchableOpacity style={{ flex: 1, padding: 10, justifyContent: 'center' }} onPress={previousSlide}>
+            <Ionicons
+              name={'ios-chevron-back'}
+              size={20}
+              color={'#0073AE'}
+            />
+          </TouchableOpacity>
+        </Box>
+        <ScrollView horizontal style={{ flex: 1, marginHorizontal: 20 }}>
+          <HStack space={4}>
+            {
+              listData.map((item, i) => {
+                return (
+                  <Box key={i} rounded='sm' style={{
+                    borderWidth: 1,
+                    borderColor: active === i ? '#0073AE' : 'transparent'
+                  }}>
+                    <Image
+                      source={require('../assets/images/form-sm.png')}
+                      style={{ width: 60, height: 60, flex: 1, borderRadius: 5 }}
+                    />
+                  </Box>
+                )
+              })
+            }
+          </HStack>
+        </ScrollView>
+        <Box justifyContent={'center'} backgroundColor={'#BFDCEB'} rounded='sm'>
+          <TouchableOpacity style={{ flex:1, padding: 10, justifyContent: 'center' }} onPress={nextSlide}>
+            <Ionicons
+              name={'ios-chevron-forward'}
+              size={20}
+              color={'#0073AE'}
+            />
+          </TouchableOpacity>
+        </Box>
       </Box>
     </View>
   )
