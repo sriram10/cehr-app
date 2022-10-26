@@ -8,7 +8,7 @@ import {
   ScrollView,
   Button,
 } from "native-base";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   View,
   Image,
@@ -59,6 +59,15 @@ const Details = () => {
     }
   }
 
+  const onSwipeChange = useCallback(({ viewableItems }) => {
+    const inView = viewableItems.filter(({ item }) => typeof item === 'number');
+
+    if (inView.length === 0) return;
+
+    currentIndex.current = inView[0].index;
+    setActive(currentIndex.current)
+  }, [])
+
   return (
     <View style={styles.root}>
       <Header />
@@ -100,7 +109,7 @@ const Details = () => {
           snapToInterval={responsiveWidth(100)}
           showsHorizontalScrollIndicator={false}
           data={listData}
-          
+          onViewableItemsChanged={onSwipeChange}
           renderItem={({ item }) => {
             return (
               <Box p={4} flex={1} w={responsiveWidth(100)}>
