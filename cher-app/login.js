@@ -34,8 +34,10 @@ const Login = () => {
         <View style={{ flex: 1 }} />
         <View style={styles.loginContainer}>
           <Image
-            source={require('../assets/images/cher-logo.png')}
+            source={require('../assets/images/cehr-logo.png')}
             style={styles.logo}
+            resizeMode='contain'
+            resizeMethod="auto"
             />
 
           <View style={styles.textContainer}>
@@ -65,7 +67,9 @@ const Login = () => {
 
 const styles = StyleSheet.create({
   logo: {
-    marginVertical: 20
+    marginVertical: 20,
+    height: 60,
+    marginLeft: -80,
   },
   container: {
     flex: 1,

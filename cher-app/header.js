@@ -6,6 +6,7 @@ import {
   Platform,
   Dimensions,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native'
 import {Ionicons} from '@expo/vector-icons';
 import { responsiveWidth } from "react-native-responsive-dimensions";
@@ -19,18 +20,22 @@ const Header = () => {
     navigate('Login')
   }
 
+  const gotoDash = () => {
+    navigate('Dashboard')
+  }
+
   return (
     <View style={styles.root}>
       <StatusBar barStyle={'dark-content'} />
       <View style={styles.header}>
-        <View>
+        <TouchableOpacity onPress={gotoDash}>
           <Image
-            source={require('../assets/images/cher-logo.png')}
+            source={require('../assets/images/cehr-logo.png')}
             style={styles.logo}
             resizeMethod='auto'
             resizeMode='contain'
             />
-        </View>
+        </TouchableOpacity>
         
         <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
           <Button variant={'ghost'} _text={{ color: 'gray.800' }}>Help</Button>
@@ -62,7 +67,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginVertical: 20,
-    width: 80
+    width: 240
   },
   header: {
     paddingTop: 20,
