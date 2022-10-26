@@ -29,35 +29,39 @@ const Profile = () => {
 
       <Box p={4}>
         <GoBack />
-        <Heading size={'sm'} mb={2}>Patient Information Display</Heading>
-
-        <HStack mt={2} space={4}>
-          <VStack space={1}>
-            <HStack space={2}>
-              <Text color={'gray.500'}>Name</Text>
-              <Text>Wanda	Morrison</Text>
+        <HStack space={4} mt={2}>
+          <Box flex={2} />
+          <Box flex={1} p={4} rounded={'md'} bg='white' shadow={3}>
+            <Heading size={'xs'} mb={2}>Patient Information</Heading>
+            <HStack mt={2} space={4}>
+              <VStack space={1}>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
+                  <Text fontSize={"xs"}>Wanda	Morrison</Text>
+                </HStack>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>File Number</Text>
+                  <Text fontSize={"xs"}>DC545930</Text>
+                </HStack>
+              </VStack>
+              <VStack space={1}>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Age</Text>
+                  <Text fontSize={"xs"}>34</Text>
+                </HStack>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Diabetic</Text>
+                  <Text fontSize={"xs"}>No</Text>
+                </HStack>
+              </VStack>
             </HStack>
-            <HStack space={2}>
-              <Text color={'gray.500'}>Age</Text>
-              <Text>34</Text>
-            </HStack>
-          </VStack>
-          <VStack space={1}>
-            <HStack space={2}>
-              <Text color={'gray.500'}>Diabetic</Text>
-              <Text>No</Text>
-            </HStack>
-            <HStack space={2}>
-              <Text color={'gray.500'}>File Number</Text>
-              <Text>DC545930</Text>
-            </HStack>
-          </VStack>
+          </Box>
         </HStack>
       </Box>
 
 
-      <ScrollView flex={1} px={4}>
-        <Heading mt={4} size={'md'}>All Forms</Heading>
+      <ScrollView flex={1} px={4} >
+        <Heading size={'md'}>All Forms</Heading>
         <VStack space={6} mt={2}>
           {
             [1,2,3,4,5,6].map((d, i) => (

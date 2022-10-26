@@ -68,34 +68,104 @@ const Details = () => {
     setActive(currentIndex.current)
   }, [])
 
+  const onItemClick = (index) => {
+    if (listRef.current) {
+      currentIndex.current = index;
+      listRef.current.scrollToIndex({
+        animated: true,
+        index,
+      });
+
+      setActive(currentIndex.current)
+    }
+  }
+
   return (
     <View style={styles.root}>
       <Header />
       <Box p={4}>
         <GoBack />
-        <Heading size={'sm'} mb={2}>Patient Information Display</Heading>
-
-        <HStack mt={2} space={4}>
-          <VStack space={1}>
-            <HStack space={2}>
-              <Text color={'gray.500'}>Name</Text>
-              <Text>Wanda	Morrison</Text>
+        <HStack space={4} mt={2}>
+          <Box flex={2} p={4} rounded={'md'} bg='white' shadow={2}>
+          <Heading size={'xs'} mb={2}>Form Meta-data</Heading>
+            <HStack mt={2} space={4}>
+              <VStack space={1}>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
+                  <Text fontSize={"xs"}>Value</Text>
+                </HStack>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
+                  <Text fontSize={"xs"}>Value</Text>
+                </HStack>
+              </VStack>
+              <VStack space={1}>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
+                  <Text fontSize={"xs"}>Value</Text>
+                </HStack>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
+                  <Text fontSize={"xs"}>Value</Text>
+                </HStack>
+              </VStack>
+              <VStack space={1}>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
+                  <Text fontSize={"xs"}>Value</Text>
+                </HStack>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
+                  <Text fontSize={"xs"}>Value</Text>
+                </HStack>
+              </VStack>
+              <VStack space={1}>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
+                  <Text fontSize={"xs"}>Value</Text>
+                </HStack>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
+                  <Text fontSize={"xs"}>Value</Text>
+                </HStack>
+              </VStack>
+              <VStack space={1}>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
+                  <Text fontSize={"xs"}>Value</Text>
+                </HStack>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
+                  <Text fontSize={"xs"}>Value</Text>
+                </HStack>
+              </VStack>
             </HStack>
-            <HStack space={2}>
-              <Text color={'gray.500'}>Age</Text>
-              <Text>34</Text>
+          </Box>
+          <Box flex={1} p={4} rounded={'md'} bg='white' shadow={2}>
+            <Heading size={'xs'} mb={2}>Patient Information</Heading>
+            <HStack mt={2} space={4}>
+              <VStack space={1}>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
+                  <Text fontSize={"xs"}>Wanda	Morrison</Text>
+                </HStack>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>File Number</Text>
+                  <Text fontSize={"xs"}>DC545930</Text>
+                </HStack>
+              </VStack>
+              <VStack space={1}>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Age</Text>
+                  <Text fontSize={"xs"}>34</Text>
+                </HStack>
+                <HStack space={2}>
+                  <Text fontSize={"xs"} color={'gray.500'}>Diabetic</Text>
+                  <Text fontSize={"xs"}>No</Text>
+                </HStack>
+              </VStack>
             </HStack>
-          </VStack>
-          <VStack space={1}>
-            <HStack space={2}>
-              <Text color={'gray.500'}>Diabetic</Text>
-              <Text>No</Text>
-            </HStack>
-            <HStack space={2}>
-              <Text color={'gray.500'}>File Number</Text>
-              <Text>DC545930</Text>
-            </HStack>
-          </VStack>
+          </Box>
         </HStack>
       </Box>
 
@@ -159,10 +229,12 @@ const Details = () => {
                     borderWidth: 1,
                     borderColor: active === i ? '#0073AE' : 'transparent'
                   }}>
-                    <Image
-                      source={require('../assets/images/form-sm.png')}
-                      style={{ width: 60, height: 60, flex: 1, borderRadius: 5 }}
-                    />
+                    <TouchableOpacity onPress={() => onItemClick(i)} style={{ flex: 1 }}>
+                      <Image
+                        source={require('../assets/images/form-sm.png')}
+                        style={{ width: 60, height: 60, flex: 1, borderRadius: 5 }}
+                      />
+                    </TouchableOpacity>
                   </Box>
                 )
               })
