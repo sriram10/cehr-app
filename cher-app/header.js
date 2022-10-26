@@ -7,7 +7,7 @@ import {
   Dimensions,
   StyleSheet,
 } from 'react-native'
-import Ionicons from '@expo/vector-icons/Ionicons';
+import {Ionicons} from '@expo/vector-icons';
 import { responsiveWidth } from "react-native-responsive-dimensions";
 
 const { width } = Dimensions.get('screen')

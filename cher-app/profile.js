@@ -13,6 +13,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native"
+import GoBack from "./goback";
 import Header from "./header"
 
 
@@ -27,6 +28,7 @@ const Profile = () => {
       <Header />
 
       <Box p={4}>
+        <GoBack />
         <Heading size={'sm'} mb={2}>Patient Information Display</Heading>
 
         <HStack mt={2} space={4}>
