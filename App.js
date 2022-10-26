@@ -1,12 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+// import { StatusBar } from 'expo-status-bar';
+import { StyleSheet } from 'react-native';
+import { NativeBaseProvider, Text, Box } from "native-base";
+import { NavigationContainer } from '@react-navigation/native';
+import CherApp from './cher-app';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider>
+      <NavigationContainer>
+        <CherApp />
+      </NavigationContainer>
+    </NativeBaseProvider>
   );
 }
 
