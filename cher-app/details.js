@@ -19,10 +19,16 @@ import {
 import { responsiveWidth } from "react-native-responsive-dimensions";
 import GoBack from "./goback";
 import Header from "./header"
+import { useNavigation } from "@react-navigation/native";
 
 const listData = [1,2,3,4,5,6,7,8];
 
 const Details = () => {
+
+  const { navigate } = useNavigation();
+  const onViewEdit = () => {
+    navigate('Edit')
+  }
 
   const currentIndex = useRef(0);
   const [active, setActive] = useState(0);
@@ -186,6 +192,7 @@ const Details = () => {
                 <Box mb={2} flexDirection={'row'} justifyContent={'space-between'}>
                   <Heading size={'md'}>Form 0{item} - Cataract 0{item}</Heading>
                   <Button
+                  onPress={()=>{onViewEdit()}}
                     variant={'outline'}
                     size={'sm'}
                     leftIcon={
