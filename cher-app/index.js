@@ -1,6 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import Dashboard from './dashboard';
 import Details from './details';
+import Edit from './edit';
 import Login from './login';
 import Profile from './profile';
 
@@ -15,6 +16,7 @@ const CherApp = () => {
       <Stack.Screen name="Dashboard" component={Dashboard} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Details" component={Details} />
+      <Stack.Screen name="Edit" component={Edit} />
     </Stack.Navigator>
   )
 }
