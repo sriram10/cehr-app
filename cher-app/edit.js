@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { Box, Text, Heading, HStack, VStack } from "native-base";
 import React, { useState } from "react";
 import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
@@ -7,13 +8,14 @@ import ChatBoxModel from "./chatBoxModel";
 const listData = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const Edit = () => {
-  // const { navigate } = useNavigation();
-  const [active, setActive] = useState(0);
+  const { goBack } = useNavigation();
+  // const [active, setActive] = useState(0);
 
   return (
     <View style={styles.root}>
-      <Box p={4}>
-        <HStack space={4} mt={2}>
+      <Box p={4} pt={8}>
+        <Heading size={'md'} mt={4}>Form 01 - Cataract 01</Heading>
+        <HStack space={4} mt={4}>
           <Box flex={2} p={4} rounded={"md"} bg="white" shadow={2}>
             <Heading size={"xs"} mb={2}>
               Form Meta-data
@@ -142,16 +144,13 @@ const Edit = () => {
             </View>
           </Box>
         </Box>
-        {/* )
-          }}
-        /> */}
       </Box>
 
       <View style={styles.btnContainer}>
-        <TouchableOpacity style={styles.outbtnStyle}>
-          <Text style={{ color: "#0073AE" }}>Cancle</Text>
+        <TouchableOpacity style={styles.outbtnStyle} onPress={() => goBack()}>
+          <Text style={{ color: "#0073AE" }}>Cancel</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnStyle}>
+        <TouchableOpacity style={styles.btnStyle} onPress={() => goBack()}>
           <Text style={styles.btnText}>Save</Text>
         </TouchableOpacity>
       </View>

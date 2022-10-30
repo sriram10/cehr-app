@@ -7,33 +7,34 @@ import Colors from "./Colors";
 
 // import { Colors } from 'react-native/Libraries/NewAppScreen';
 
+const chatboxdata = [
+  {
+    text: "hello santhos how was the day! hello santhos how was the day!",
+    time: "12:45",
+    audio: "null",
+    istext: true,
+    sender: "nick",
+  },
+  {
+    text: "prperly flow",
+    time: "12:45",
+    audio: "null",
+    istext: true,
+    sender: "nick",
+  },
+  {
+    text: "Not take much time",
+    time: "12:45",
+    audio: "null",
+    istext: true,
+    sender: "nick",
+  },
+];
+
 const ChatBoxModel = () => {
-  const chatboxdata = [
-    {
-      text: "hello santhos how was the day! hello santhos how was the day!",
-      time: "12:45",
-      audio: "null",
-      istext: true,
-      sender: "nick",
-    },
-    {
-      text: "prperly flow",
-      time: "12:45",
-      audio: "null",
-      istext: true,
-      sender: "nick",
-    },
-    {
-      text: "Not take much time",
-      time: "12:45",
-      audio: "null",
-      istext: true,
-      sender: "nick",
-    },
-  ];
   const [chatBoxVisible, setChatBoxVisible] = useState(true);
   return (
-    <View style={[styles.mainConatainer]}>
+    <View style={[styles.mainConatainer, styles.shadow]}>
       {chatBoxVisible ? (
         <View style={[styles.chatBoxContainer, styles.shadowProps]}>
           <ChatBox initialChatData={chatboxdata} />
@@ -74,7 +75,6 @@ export default ChatBoxModel;
 const styles = StyleSheet.create({
   mainConatainer: {
     flex: 1,
-
     alignItems: "center",
     justifyContent: "center",
   },
@@ -84,20 +84,15 @@ const styles = StyleSheet.create({
     right: 0,
     width: 400,
     height: 500,
-    backgroundColor: "red",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderRadius: 20,
     borderBottomRightRadius: 0,
-    borderBottomLeftRadius: 20,
     overflow: "hidden",
   },
   chatBtnBool: {
-    width: 100,
-    height: 80,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    width: 80,
+    height: 60,
+    borderRadius: 20,
     borderBottomRightRadius: 0,
-    borderBottomLeftRadius: 20,
     backgroundColor: "#00BEE6",
     right: 0,
     bottom: 0,
@@ -108,21 +103,39 @@ const styles = StyleSheet.create({
   },
   cancleCon: {
     position: "absolute",
-    backgroundColor: "white",
-    borderRadius: 25,
-    right: 0,
+    backgroundColor: "rgba(255, 255, 255, .75)",
+    borderBottomLeftRadius: 25,
+    right: 2,
+    top: 2,
     width: 50,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
   },
   shadowProps: {
-    shadowOpacity: 0.4,
-    shadowRadius: 1,
-    elevation: 1,
-    shadowColor: "#0073AE",
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: "lightblue",
-    
+    borderRadius: 20,
+    borderBottomRightRadius: 0,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity:  0.17,
+    shadowRadius: 5,
+    elevation: 3
+  },
+  shadow: {
+    borderRadius: 20,
+    borderBottomRightRadius: 0,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity:  0.17,
+    shadowRadius: 5,
+    elevation: 3
   },
 });

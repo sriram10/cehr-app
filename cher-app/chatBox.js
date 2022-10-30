@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Audio } from "expo-av";
 import Colors from "./Colors";
+
 const ChatBox = () => {
   const refr = useRef(null);
   // states
@@ -83,7 +84,6 @@ const ChatBox = () => {
 
   // Audio recorder Stop
   async function stopRecording() {
-    setRecording(undefined);
     await recording.stopAndUnloadAsync();
     const { sound, status } = await recording.createNewLoadedSoundAsync();
     const filepath = recording.getURI();
@@ -99,12 +99,13 @@ const ChatBox = () => {
       stopRecording().then((e) => {
         addAudio(e);
         setAudiobtn(!bool);
+        setRecording(undefined);
       });
     }
   };
   return (
     <View style={styles.mainConatianer}>
-      <StatusBar />
+      {/* <StatusBar /> */}
       {/* {total content} */}
       <View style={styles.content}>
         <View style={styles.chatbox}>
@@ -116,6 +117,7 @@ const ChatBox = () => {
               onContentSizeChange={() =>
                 refr?.current?.scrollToEnd({ animated: true })
               }
+              style={styles.chatList}
             >
               {chatboxData.map((e, index) => {
                 if (e.istext) {
@@ -149,7 +151,7 @@ const ChatBox = () => {
                           index == currentAudioCard && {
                             backgroundColor: Colors.primarybackground,
                           },
-                          { maxWidth: 180, borderRadius: 20 },
+                          { maxWidth: 180, borderRadius: 10, padding: 5 },
                         ]}
                         onPress={async () => {
                           setCurrentAudioCard(index);
@@ -170,8 +172,6 @@ const ChatBox = () => {
                             letterSpacing: 1,
                             fontWeight: "700",
                             color: "#0073AE",
-                            marginLeft: 15,
-                            marginTop: 5,
                           }}
                         >
                           {e.sender}
@@ -179,7 +179,7 @@ const ChatBox = () => {
 
                         <View
                           style={{
-                            padding: 20,
+                            paddingHorizontal: 20,
                             transform: [{ scale: 0.7 }],
                             flexDirection: "row",
                             alignItems: "center",
@@ -281,18 +281,14 @@ const styles = StyleSheet.create({
   mainConatianer: {
     flex: 1,
     backgroundColor: "white",
-  },
-  detailLable: {
-    marginVertical: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginHorizontal: 25,
-  },
-  detailLableRight: {},
-  detailLableLeft: {
-    flexDirection: "row",
-    alignItems: "center",
+    shadowOpacity: 0.4,
+    shadowRadius: 1,
+    elevation: 1,
+    shadowColor: "#0073AE",
+    borderRadius: 20,
+    borderBottomRightRadius: 0,
+    borderWidth: 1, //StyleSheet.hairlineWidth,
+    borderColor: "lightblue",
   },
   content: {
     flex: 1,
@@ -310,11 +306,17 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     // marginVertical:150
   },
+  chatList: {
+    padding: 10,
+    marginTop: 10,
+    borderTopLeftRadius: 25,
+    backgroundColor: '#fff',
+  },
   chatbox: {
     flex: 1,
     backgroundColor: "white",
     borderRadius: 10,
-    marginTop: 10,
+    // marginTop: 10,
   },
   chatcard: {
     // backgroundColor:'white',
@@ -325,7 +327,7 @@ const styles = StyleSheet.create({
   chatContent: {
     flex: 1,
     //   backgroundColor:'red',
-    paddingHorizontal: 10,
+    // paddingHorizontal: 10,
     justifyContent: "center",
   },
   chatboxleft: {
@@ -353,6 +355,17 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     flexDirection: "row",
     justifyContent: "space-between",
+
+    shadowColor: "#00BEE6",
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    shadowOpacity:  0.1,
+    shadowRadius: 8,
+    elevation: 3,
+    borderTopColor: '#ccc',
+    borderTopWidth: StyleSheet.hairlineWidth
   },
   outlinebtn: {
     paddingHorizontal: 20,
@@ -385,7 +398,6 @@ const styles = StyleSheet.create({
   texth2: {
     fontWeight: "600",
     fontSize: 20,
-
     color: "#000000",
   },
   texth3: {
@@ -405,19 +417,20 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     paddingVertical: 5,
     fontSize: 15,
-    maxWidth: 250,
+    maxWidth: '100%',
+    borderTopLeftRadius: 10,
     borderBottomLeftRadius: 0,
     marginBottom: 3,
     backgroundColor: Colors.primarycolorBackground2,
-    borderRadius: 15,
+    borderRadius: 10,
     lineHeight: 25,
 
     color: "#000000",
   },
   chath2: {
-    fontWeight: "600",
+    fontWeight: "500",
     fontSize: 15,
-    maxWidth: 250,
+    // maxWidth: 250,
     borderBottomLeftRadius: 0,
     marginBottom: 5,
     backgroundColor: Colors.primarycolorBackground2,
@@ -449,22 +462,22 @@ const styles = StyleSheet.create({
 
 const chatboxdata = [
   {
-    text: "hello santhos how was the day! hello santhos how was the day!",
-    time: "12:45",
+    text: "I can see some anomalies in here. I can see some anomalies in here.",
+    time: "12:45 am",
     audio: "null",
     istext: true,
     sender: "nick",
   },
   {
-    text: "prperly flow",
-    time: "12:45",
+    text: "Verify once before proceeding",
+    time: "12:55 am",
     audio: "null",
     istext: true,
     sender: "nick",
   },
   {
-    text: "Not take much time",
-    time: "12:45",
+    text: "Advised to take another test",
+    time: "03:23 pm",
     audio: "null",
     istext: true,
     sender: "nick",
