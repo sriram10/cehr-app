@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { responsiveWidth } from "react-native-responsive-dimensions";
 import { LineChart } from "react-native-gifted-charts";
 import Header from "./header";
+import AgendaCalendar from "./AgendaCalendar";
 
 const chartData = [
   {value:30},
@@ -200,6 +201,10 @@ const Dashboard = () => {
             }
           </VStack>
         </Box>
+        <View style={styles.agendaCantainer}>
+             <Heading size={'sm'} mb={2}>Agenda</Heading>
+             <AgendaCalendar/>
+        </View>
       </ScrollView>
 
     </View>
@@ -219,7 +224,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 40,
     ...Platform.select({
-      ios: {
+      android: {
         borderTopStartRadius: 8,
         borderTopEndRadius: 8,
       }
@@ -232,6 +237,10 @@ const styles = StyleSheet.create({
   },
   tableText: {
     color: '#333'
+  },
+  agendaCantainer:{
+    marginVertical:20,
+    overflow:'hidden'
   }
 })
 
