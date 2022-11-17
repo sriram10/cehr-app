@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 40,
     ...Platform.select({
-      android: {
+      ios: {
         borderTopStartRadius: 8,
         borderTopEndRadius: 8,
       }
