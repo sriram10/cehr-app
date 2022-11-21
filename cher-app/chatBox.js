@@ -3,6 +3,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Audio } from "expo-av";
 import Colors from "./Colors";
+import AudioPlayer from "./AudioPlayer";
+import { rotate } from "@shopify/react-native-skia";
 
 const ChatBox = () => {
   const refr = useRef(null);
@@ -144,69 +146,7 @@ const ChatBox = () => {
                 } else {
                   return (
                     <View key={index}>
-                      <TouchableOpacity
-                        key={index}
-                        style={[
-                          styles.chath2,
-                          index == currentAudioCard && {
-                            backgroundColor: Colors.primarybackground,
-                          },
-                          { maxWidth: 180, borderRadius: 10, padding: 5 },
-                        ]}
-                        onPress={async () => {
-                          setCurrentAudioCard(index);
-                          setTimeout(() => {
-                            setCurrentAudioCard(-1);
-                          }, e.duretion);
-
-                          const sound = new Audio.Sound();
-                          try {
-                            await sound.loadAsync({ uri: e.audio });
-                            await sound.replayAsync();
-                          } catch (error) {}
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontSize: 15,
-                            letterSpacing: 1,
-                            fontWeight: "700",
-                            color: "#0073AE",
-                          }}
-                        >
-                          {e.sender}
-                        </Text>
-
-                        <View
-                          style={{
-                            paddingHorizontal: 20,
-                            transform: [{ scale: 0.7 }],
-                            flexDirection: "row",
-                            alignItems: "center",
-                            justifyContent: "space-evenly",
-                            marginLeft: 20,
-                          }}
-                        >
-                          <Ionicons
-                            name={index == currentAudioCard ? "stop" : "play"}
-                            size={30}
-                            color="black"
-                            style={{
-                              position: "absolute",
-                              transform: [{ translateX: -20 }],
-                            }}
-                          />
-                          {index == currentAudioCard ? (
-                            <Image
-                              source={require("../assets/images/waveBlue.png")}
-                            />
-                          ) : (
-                            <Image
-                              source={require("../assets/images/waveBlack.png")}
-                            />
-                          )}
-                        </View>
-                      </TouchableOpacity>
+                      <AudioPlayer audiourl={e.audio} sendername={e.sender}/>
                       <Text style={[styles.cardTime]}>{e.time}</Text>
                     </View>
                   );
@@ -214,7 +154,6 @@ const ChatBox = () => {
               })}
             </ScrollView>
           </View>
-
           {/* {Keypad inputer } */}
           <View
             style={[
@@ -266,7 +205,7 @@ const ChatBox = () => {
                 setCurrentText("");
               }}
             >
-              <Ionicons name="paper-plane" size={32} color={"#00BEE6"} />
+              <Ionicons name="paper-plane" size={35} color={"#00BEE6"} style={{transform:[{rotate:"-45deg"}]}}/>
             </TouchableOpacity>
           </View>
         </View>
@@ -338,6 +277,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     backgroundColor: "#00BEE6",
+    
   },
   chatboxRight: {
     flex: 8,

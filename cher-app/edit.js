@@ -1,16 +1,24 @@
 import { useNavigation } from "@react-navigation/native";
 import { Box, Text, Heading, HStack, VStack } from "native-base";
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { responsiveWidth } from "react-native-responsive-dimensions";
 import ChatBoxModel from "./chatBoxModel";
-
+import {SketchCanvas} from 'rn-perfect-sketch-canvas'
+import {SvgXml} from 'react-native-svg'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 const listData = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const Edit = () => {
-  const { goBack } = useNavigation();
-  // const [active, setActive] = useState(0);
+  
+  const [showToolBar,setShowToolBar] = useState(false);
+  const [isDraw,setIsDraw] = useState(false);
+  const [instaZoom,setInstaZoom] = useState(true);
 
+  const { goBack } = useNavigation();
+  const canvaRef = useRef(null);
   return (
     <View style={styles.root}>
       <Box p={4} pt={8}>
@@ -130,17 +138,54 @@ const Edit = () => {
           </Box>
         </HStack>
       </Box>
+      <View style={styles.toolbarContainer}>
+          {(!showToolBar)?<TouchableOpacity style={[styles.btnStyle,{backgroundColor:'#00BCE4'}]} onPress={()=>{setShowToolBar(true)}}>
+          <Text style={styles.btnText}>Scribble</Text>
+          <MaterialCommunityIcons name="draw" size={24} color="white" style={{marginLeft:10}}/>
+         </TouchableOpacity>:
+         <View style={{width:"100%",height:30,alignItems:"center",justifyContent:"center"}}>
+            <View style={styles.toolbar}>
+            <TouchableOpacity style={styles.toolBarBtn} onPress={()=>{canvaRef?.current?.undo()}}>
+            <Ionicons name="arrow-undo" size={24} color="white"/>
+            <Text style={styles.btnText}>Undo</Text>
+            </TouchableOpacity>
+          
+            <TouchableOpacity style={styles.toolBarBtn} onPress={()=>{canvaRef?.current?.redo()}}>
+            <Ionicons name="arrow-redo" size={24} color="white"/>
+            <Text style={styles.btnText}>Redo</Text>
+            </TouchableOpacity>
 
+            <TouchableOpacity style={styles.toolBarBtn}>
+            <Ionicons name="md-crop-outline" size={24} color="white" />
+            <Text style={styles.btnText}>Zoom</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.toolBarBtn}>
+            <Ionicons name="pencil" size={24} color="#0073AE" />
+            <Text style={[styles.btnText,{color:"#0073AE"}]}>Draw</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.cancleBtn} onPress={()=>{setShowToolBar(false)}}>
+            <MaterialIcons name="cancel" size={24} color="white" />
+            </TouchableOpacity>
+
+            </View>
+         </View>}
+      </View>
       <Box flex={1}>
         <Box p={4} flex={1} w={responsiveWidth(100)}>
           <Box flex={1}>
             <Image
               source={require("../assets/images/form-sm.png")}
-              style={{ flex: 1, width: "100%" }}
-            />
-
-            <View style={[styles.chatConatiner, styles.shadowProp]}>
-              <ChatBoxModel />
+              style={[{ flex: 1, width: "100%" }]}/>
+            <SketchCanvas
+              ref={canvaRef}
+              strokeColor={"#0073AE"}
+              strokeWidth={8} 
+              containerStyle={[styles.sketchContainer,StyleSheet.absoluteFill]}   
+      />
+            <View style={StyleSheet.absoluteFill}>
+            <ChatBoxModel/> 
             </View>
           </Box>
         </Box>
@@ -164,6 +209,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(229, 241, 247, 0.5)",
   },
   btnStyle: {
+    flexDirection:'row',
     paddingHorizontal: 20,
     paddingVertical: 10,
     backgroundColor: "#0073AE",
@@ -197,14 +243,49 @@ const styles = StyleSheet.create({
     color: "white",
   },
   chatConatiner: {
-    width: 400,
-    height: 500,
+    backgroundColor:'red',
+    width:"10%",
+    height:"10%",
     position: "absolute",
-    right: 0,
+    left: 0,
     bottom: 0,
     borderRadius: 20,
     borderBottomRightRadius: 0,
+    zindex:1,
   },
+  sketchContainer:{
+    flex:1
+  },
+  toolbarContainer:{
+    alignItems:'flex-end',
+    marginHorizontal:20,
+    height:50,
+    justifyContent:'center'
+  },
+  toolbar:{
+    height:50,
+    justifyContent:'center',
+    borderRadius:10,
+    padding:10,
+    backgroundColor:"#00BCE4",
+    flexDirection:'row',
+    alignItems:'center'
+  },
+  toolBarBtn:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:"center",
+    borderRightColor:"lightblue",
+    borderRightWidth:1,
+    marginHorizontal:5,
+    paddingRight:15
+  },
+  cancleBtn:{
+    alignItems:'center',
+    justifyContent:'center',
+    opacity:.9,
+    marginLeft:5
+  }
 });
 
 export default Edit;
