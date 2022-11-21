@@ -34,7 +34,7 @@ const chatboxdata = [
 const ChatBoxModel = () => {
   const [chatBoxVisible, setChatBoxVisible] = useState(true);
   return (
-    <View style={[styles.mainConatainer, styles.shadow]}>
+    <View style={[styles.mainConatainer,]}>
       {chatBoxVisible ? (
         <View style={[styles.chatBoxContainer, styles.shadowProps]}>
           <ChatBox initialChatData={chatboxdata} />
@@ -74,7 +74,7 @@ export default ChatBoxModel;
 
 const styles = StyleSheet.create({
   mainConatainer: {
-    flex: 1,
+    flex:1,
     alignItems: "center",
     justifyContent: "center",
   },
