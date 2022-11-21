@@ -1,10 +1,9 @@
-import {StyleSheet,Text,View,TouchableOpacity,Image,ScrollView,TextInput,StatusBar,} from "react-native";
+import {StyleSheet,Text,View,TouchableOpacity,ScrollView,TextInput,StatusBar,} from "react-native";
 import React, { useEffect, useState, useRef } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Audio } from "expo-av";
 import Colors from "./Colors";
 import AudioPlayer from "./AudioPlayer";
-import { rotate } from "@shopify/react-native-skia";
 
 const ChatBox = () => {
   const refr = useRef(null);
@@ -13,7 +12,6 @@ const ChatBox = () => {
   const [currentText, setCurrentText] = useState("");
   const [audioBtnenable, setAudiobtn] = useState(false);
   const [recording, setRecording] = useState();
-  const [currentAudioCard, setCurrentAudioCard] = useState(0);
   useEffect(() => {
     setchatboxData(chatboxdata);
     const now = new Date();
@@ -146,7 +144,7 @@ const ChatBox = () => {
                 } else {
                   return (
                     <View key={index}>
-                      <AudioPlayer audiourl={e.audio} sendername={e.sender}/>
+                      <AudioPlayer audiourl={e.audio} sendername={e.sender} />
                       <Text style={[styles.cardTime]}>{e.time}</Text>
                     </View>
                   );
@@ -205,7 +203,12 @@ const ChatBox = () => {
                 setCurrentText("");
               }}
             >
-              <Ionicons name="paper-plane" size={35} color={"#00BEE6"} style={{transform:[{rotate:"-45deg"}]}}/>
+              <Ionicons
+                name="paper-plane"
+                size={35}
+                color={"#00BEE6"}
+                style={{ transform: [{ rotate: "-45deg" }] }}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -233,8 +236,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     margin: 0,
-
-    // backgroundColor:"purple"
   },
   imageicon: {
     flex: 3,
@@ -243,51 +244,42 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 25,
     overflow: "hidden",
-    // marginVertical:150
   },
   chatList: {
     padding: 10,
     marginTop: 10,
     borderTopLeftRadius: 25,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   chatbox: {
     flex: 1,
     backgroundColor: "white",
     borderRadius: 10,
-    // marginTop: 10,
   },
   chatcard: {
-    // backgroundColor:'white',
     paddingVertical: 2,
     alignItems: "flex-start",
     justifyContent: "center",
   },
   chatContent: {
     flex: 1,
-    //   backgroundColor:'red',
-    // paddingHorizontal: 10,
     justifyContent: "center",
   },
   chatboxleft: {
-    // backgroundColor:'red',
     alignItems: "center",
     justifyContent: "center",
     width: 40,
     height: 40,
     borderRadius: 20,
     backgroundColor: "#00BEE6",
-    
   },
   chatboxRight: {
     flex: 8,
     alignItems: "flex-end",
     justifyContent: "center",
-    // backgroundColor:'blur'
   },
   textFileder: {
     flex: 3,
-    // backgroundColor:'pink'
   },
   chatboxinputcon: {
     paddingVertical: 10,
@@ -295,17 +287,16 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     flexDirection: "row",
     justifyContent: "space-between",
-
     shadowColor: "#00BEE6",
     shadowOffset: {
       width: 0,
       height: -2,
     },
-    shadowOpacity:  0.1,
+    shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 3,
-    borderTopColor: '#ccc',
-    borderTopWidth: StyleSheet.hairlineWidth
+    borderTopColor: "#ccc",
+    borderTopWidth: StyleSheet.hairlineWidth,
   },
   outlinebtn: {
     paddingHorizontal: 20,
@@ -357,7 +348,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     paddingVertical: 5,
     fontSize: 15,
-    maxWidth: '100%',
+    maxWidth: "100%",
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 0,
     marginBottom: 3,
