@@ -1,90 +1,70 @@
 import { Ionicons } from "@expo/vector-icons";
-import {
-  Box,
-  Text,
-  Heading,
-  HStack,
-  VStack,
-  ScrollView,
-  Button,
-} from "native-base";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import {
-  View,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  FlatList,
-} from "react-native"
+import { Box, Heading, HStack, Button } from "native-base";
+import React, { useRef, useState,useEffect } from "react";
+import {View,Image,StyleSheet,TouchableOpacity,FlatList,} from "react-native";
 import { responsiveWidth } from "react-native-responsive-dimensions";
-import GoBack from "./goback";
-import Header from "./header"
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation} from "@react-navigation/native";
+import {Header,PatientInformationCard,MeteDataCard,GoBack,} from "../components";
+import { SIZE,images} from "../constants";
 
-const listData = [1,2,3,4,5,6,7,8];
+
+// dummy data for list rendering
+const listData = [
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+  23, 24, 25, 26,
+];
+
+
 
 const Details = () => {
 
+  // refs for flatlists
+  const thumbSpacing = 10;
+  const thumbImageSize = 60;
+  const topRef = useRef(null);
+  const thumbRef = useRef(null);
+  const [active, setActive] = useState(0);
+
   const { navigate } = useNavigation();
   const onViewEdit = () => {
-    navigate('Edit')
-  }
+    navigate("Edit");
+  };
 
-  const currentIndex = useRef(0);
-  const [active, setActive] = useState(0);
-  const listRef = useRef();
 
-  const previousSlide = () => {
-    if (currentIndex.current === 0) {
-      return;
-    }
-  
-    if (listRef.current) {
-      currentIndex.current = currentIndex.current - 1
-      listRef.current.scrollToIndex({
+
+  const toplistScrolltoIndex = (index) => {
+    setActive(index);
+    console.log("index :", index);
+    topRef?.current?.scrollToOffset({
+      offset: index * SIZE.width,
+      animated: true,
+    });
+    if (
+      index * (thumbImageSize + thumbSpacing) - thumbImageSize / 2 >
+      (SIZE.width - 180) / 2
+    ) {
+      //180 for the ☝️ side navigation buttons spacing and width
+      thumbRef?.current?.scrollToOffset({
+        offset:
+          index * (thumbImageSize + thumbSpacing) -
+          (SIZE.width - 180) / 2 +
+          thumbImageSize / 2,
         animated: true,
-        index: currentIndex.current,
       });
-
-      setActive(currentIndex.current)
     }
-  }
-  const nextSlide = () => {
-    if (currentIndex.current === (listData.length - 1)) {
-      return;
+  };
+
+  const nextIndex = () => {
+    console.log(listData.length);
+    if (active < listData.length - 1) {
+      toplistScrolltoIndex(active + 1);
     }
-  
-    if (listRef.current) {
-      currentIndex.current = currentIndex.current + 1
-      listRef.current.scrollToIndex({
-        animated: true,
-        index: currentIndex.current,
-      });
-
-      setActive(currentIndex.current)
+  };
+  const PriviousIndex = () => {
+    if (active > 0) {
+      toplistScrolltoIndex(active - 1);
     }
-  }
-
-  const onSwipeChange = useCallback(({ viewableItems }) => {
-    const inView = viewableItems.filter(({ item }) => typeof item === 'number');
-
-    if (inView.length === 0) return;
-
-    currentIndex.current = inView[0].index;
-    setActive(currentIndex.current)
-  }, [])
-
-  const onItemClick = (index) => {
-    if (listRef.current) {
-      currentIndex.current = index;
-      listRef.current.scrollToIndex({
-        animated: true,
-        index,
-      });
-
-      setActive(currentIndex.current)
-    }
-  }
+  };
 
   return (
     <View style={styles.root}>
@@ -92,115 +72,50 @@ const Details = () => {
       <Box p={4}>
         <GoBack />
         <HStack space={4} mt={2}>
-          <Box flex={2} p={4} rounded={'md'} bg='white' shadow={2}>
-          <Heading size={'xs'} mb={2}>Form Meta-data</Heading>
-            <HStack mt={2} space={4}>
-              <VStack space={1}>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
-                  <Text fontSize={"xs"}>Value</Text>
-                </HStack>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
-                  <Text fontSize={"xs"}>Value</Text>
-                </HStack>
-              </VStack>
-              <VStack space={1}>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
-                  <Text fontSize={"xs"}>Value</Text>
-                </HStack>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
-                  <Text fontSize={"xs"}>Value</Text>
-                </HStack>
-              </VStack>
-              <VStack space={1}>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
-                  <Text fontSize={"xs"}>Value</Text>
-                </HStack>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
-                  <Text fontSize={"xs"}>Value</Text>
-                </HStack>
-              </VStack>
-              <VStack space={1}>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
-                  <Text fontSize={"xs"}>Value</Text>
-                </HStack>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
-                  <Text fontSize={"xs"}>Value</Text>
-                </HStack>
-              </VStack>
-              <VStack space={1}>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
-                  <Text fontSize={"xs"}>Value</Text>
-                </HStack>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
-                  <Text fontSize={"xs"}>Value</Text>
-                </HStack>
-              </VStack>
-            </HStack>
-          </Box>
-          <Box flex={1} p={4} rounded={'md'} bg='white' shadow={2}>
-            <Heading size={'xs'} mb={2}>Patient Information</Heading>
-            <HStack mt={2} space={4}>
-              <VStack space={1}>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
-                  <Text fontSize={"xs"}>Wanda	Morrison</Text>
-                </HStack>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>File Number</Text>
-                  <Text fontSize={"xs"}>DC545930</Text>
-                </HStack>
-              </VStack>
-              <VStack space={1}>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Age</Text>
-                  <Text fontSize={"xs"}>34</Text>
-                </HStack>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Diabetic</Text>
-                  <Text fontSize={"xs"}>No</Text>
-                </HStack>
-              </VStack>
-            </HStack>
-          </Box>
+          <MeteDataCard />
+          <PatientInformationCard
+            name={"Wanda	Morrison"}
+            fileNumber={"DC545930"}
+            age={34}
+            diabetic={"NO"}
+          />
         </HStack>
       </Box>
 
       <Box flex={1}>
+        {/* TOP FLATLIST */}
         <FlatList
-          ref={listRef}
+          ref={topRef}
           horizontal
           pagingEnabled
-          decelerationRate={'fast'}
-          keyExtractor={(t, i) => `t${i}`}
-          snapToInterval={responsiveWidth(100)}
+          onMomentumScrollEnd={(event) => {
+            toplistScrolltoIndex(
+              Math.floor(event.nativeEvent.contentOffset.x / SIZE.width)
+            );
+          }}
+          
+          decelerationRate={"fast"}
           showsHorizontalScrollIndicator={false}
           data={listData}
-          onViewableItemsChanged={onSwipeChange}
-          renderItem={({ item }) => {
+          renderItem={({ item,index }) => {
             return (
               <Box p={4} flex={1} w={responsiveWidth(100)}>
-                <Box mb={2} flexDirection={'row'} justifyContent={'space-between'}>
-                  <Heading size={'md'}>Form 0{item} - Cataract 0{item}</Heading>
+                <Box
+                  mb={2}
+                  flexDirection={"row"}
+                  justifyContent={"space-between"}
+                >
+                  <Heading size={"md"}>
+                    Form 0{item} - Cataract 0{item}
+                  </Heading>
                   <Button
-                  onPress={()=>{onViewEdit()}}
-                    variant={'outline'}
-                    size={'sm'}
+                    onPress={() => {
+                      onViewEdit();
+                    }}
+                    variant={"outline"}
+                    size={"sm"}
                     leftIcon={
-                      <Ionicons
-                        name="ios-pencil"
-                        size={18}
-                        color={'#888'}
-                      />
+                      <Ionicons name="ios-pencil" size={18} color={"#888"} />
                     }
                   >
                     Edit
@@ -208,64 +123,96 @@ const Details = () => {
                 </Box>
                 <Box flex={1}>
                   <Image
-                    source={require('../assets/images/form-sm.png')}
-                    style={{ flex: 1, width: '100%' }}
-                  /> 
+                    source={images.formSM}
+                    style={{ flex: 1, width: "100%" }}
+                  />
                 </Box>
               </Box>
-            )
+            );
           }}
         />
       </Box>
-      <Box h={100} p={4} flexDirection='row'>
-        <Box justifyContent={'center'} backgroundColor={'#BFDCEB'} rounded='sm'>
-          <TouchableOpacity style={{ flex: 1, padding: 10, justifyContent: 'center' }} onPress={previousSlide}>
-            <Ionicons
-              name={'ios-chevron-back'}
-              size={20}
-              color={'#0073AE'}
-            />
+      <Box h={100} p={4} flexDirection="row">
+        <Box justifyContent={"center"} backgroundColor={"#BFDCEB"} rounded="sm">
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              width: 40,
+              padding: 10,
+              justifyContent: "center",
+            }}
+            onPress={() => {
+              PriviousIndex();
+            }}
+          >
+            <Ionicons name={"ios-chevron-back"} size={20} color={"#0073AE"} />
           </TouchableOpacity>
         </Box>
-        <ScrollView horizontal style={{ flex: 1, marginHorizontal: 20 }}>
-          <HStack space={4}>
-            {
-              listData.map((item, i) => {
-                return (
-                  <Box key={i} rounded='sm' style={{
-                    borderWidth: 1,
-                    borderColor: active === i ? '#0073AE' : 'transparent'
-                  }}>
-                    <TouchableOpacity onPress={() => onItemClick(i)} style={{ flex: 1 }}>
-                      <Image
-                        source={require('../assets/images/form-sm.png')}
-                        style={{ width: 60, height: 60, flex: 1, borderRadius: 5 }}
-                      />
-                    </TouchableOpacity>
-                  </Box>
-                )
-              })
-            }
-          </HStack>
-        </ScrollView>
-        <Box justifyContent={'center'} backgroundColor={'#BFDCEB'} rounded='sm'>
-          <TouchableOpacity style={{ flex:1, padding: 10, justifyContent: 'center' }} onPress={nextSlide}>
+        {/* THUMB FLATLIST */}
+        <FlatList
+          horizontal
+          ref={thumbRef}
+          showsHorizontalScrollIndicator={false}
+          style={{ flex: 1, marginHorizontal: 20 }}
+          data={listData}
+          renderItem={({ item, index }) => {
+            return (
+              <Box
+                key={index}
+                rounded="sm"
+                style={{
+                  marginRight: thumbSpacing,
+                  borderWidth: 1,
+                  // borderColor:"red"
+                  borderColor: active == index ? "#0073AE" : "transparent",
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() => toplistScrolltoIndex(index)}
+                  style={{ flex: 1 }}
+                >
+                  <Image
+                    source={images.formSM}
+                    style={{
+                      width: thumbImageSize,
+                      height: thumbImageSize,
+                      flex: 1,
+                      borderRadius: 5,
+                    }}
+                  />
+                </TouchableOpacity>
+              </Box>
+            );
+          }}
+        ></FlatList>
+        <Box justifyContent={"center"} backgroundColor={"#BFDCEB"} rounded="sm">
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              width: 40,
+              padding: 10,
+              justifyContent: "center",
+            }}
+            onPress={() => {
+              nextIndex();
+            }}
+          >
             <Ionicons
-              name={'ios-chevron-forward'}
+              name={"ios-chevron-forward"}
               size={20}
-              color={'#0073AE'}
+              color={"#0073AE"}
             />
           </TouchableOpacity>
         </Box>
       </Box>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: 'rgba(229, 241, 247, 0.5)'
+    backgroundColor: "rgba(229, 241, 247, 0.5)",
   },
 });
 

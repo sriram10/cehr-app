@@ -1,8 +1,8 @@
-import {StyleSheet,Text,View,TouchableOpacity,ScrollView,TextInput,StatusBar,} from "react-native";
+import {StyleSheet,Text,View,TouchableOpacity,ScrollView,TextInput,} from "react-native";
 import React, { useEffect, useState, useRef } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Audio } from "expo-av";
-import Colors from "./Colors";
+import { COLORS } from "../constants";
 import AudioPlayer from "./AudioPlayer";
 
 const ChatBox = () => {
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
   },
   imageicon: {
     flex: 3,
-    backgroundColor: Colors.primarybackground,
+    backgroundColor: COLORS.light01,
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 25,
@@ -301,8 +301,8 @@ const styles = StyleSheet.create({
   outlinebtn: {
     paddingHorizontal: 20,
     height: 40,
-    backgroundColor: Colors.primarycolorBackground2,
-    borderColor: Colors.primaryColor,
+    backgroundColor: COLORS.light02,
+    borderColor: COLORS.primarColor,
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -313,7 +313,7 @@ const styles = StyleSheet.create({
   audioCard: {
     height: 30,
     width: 100,
-    backgroundColor: Colors.primarycolorBackground2,
+    backgroundColor: COLORS.light02,
     marginHorizontal: 10,
     borderRadius: 10,
     alignItems: "center",
@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 0,
     marginBottom: 3,
-    backgroundColor: Colors.primarycolorBackground2,
+    backgroundColor: COLORS.light02,
     borderRadius: 10,
     lineHeight: 25,
 
@@ -364,7 +364,7 @@ const styles = StyleSheet.create({
     // maxWidth: 250,
     borderBottomLeftRadius: 0,
     marginBottom: 5,
-    backgroundColor: Colors.primarycolorBackground2,
+    backgroundColor: COLORS.light02,
     borderRadius: 15,
     lineHeight: 25,
     color: "#000000",

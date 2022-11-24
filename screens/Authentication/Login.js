@@ -8,7 +8,7 @@ import {
   StyleSheet,
   ImageBackground,
 } from 'react-native'
-
+import {images,SIZE} from "../../constants"
 const { width } = Dimensions.get('screen')
 
 const Login = () => {
@@ -21,7 +21,7 @@ const Login = () => {
   return (
     <Box justifyContent={'center'} alignItems='center' flex={1}>
       <ImageBackground
-        source={require('../assets/images/doc-bg.jpeg')}
+        source={images.loginBg}
         resizeMode={'cover'}
         style={[{
           flex: 1,
@@ -34,7 +34,7 @@ const Login = () => {
         <View style={{ flex: 1 }} />
         <View style={styles.loginContainer}>
           <Image
-            source={require('../assets/images/cehr-logo.png')}
+            source={images.cehrLogo}
             style={styles.logo}
             resizeMode='contain'
             resizeMethod="auto"
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    width,
+    width:SIZE.width
   },
   loginContainer:{
     flex: 1,
@@ -92,11 +92,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width,
+    width:SIZE.width
   },
   formContainer: {
     flex: 1,
-    width,
+    width:SIZE.width,
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 30,

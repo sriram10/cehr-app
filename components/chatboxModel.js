@@ -1,9 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React, { useState,useCallback } from "react";
 import { Feather } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import ChatBox from "./chatBox";
-import Colors from "./Colors";
 
 // import { Colors } from 'react-native/Libraries/NewAppScreen';
 
@@ -32,9 +31,9 @@ const chatboxdata = [
 ];
 
 const ChatBoxModel = () => {
-  const [chatBoxVisible, setChatBoxVisible] = useState(true);
+  const [chatBoxVisible, setChatBoxVisible] = useState(false);
   return (
-    <View style={[styles.mainConatainer,]}>
+    <View style={[styles.mainConatainer]}>
       {chatBoxVisible ? (
         <View style={[styles.chatBoxContainer, styles.shadowProps]}>
           <ChatBox initialChatData={chatboxdata} />
@@ -55,7 +54,7 @@ const ChatBoxModel = () => {
       )}
     </View>
   );
-};
+        }
 const CancelChatBox = ({ chatBoxVisible, setChatBoxVisible }) => {
   return (
     <TouchableOpacity
@@ -74,7 +73,7 @@ export default ChatBoxModel;
 
 const styles = StyleSheet.create({
   mainConatainer: {
-    flex:1,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -121,9 +120,9 @@ const styles = StyleSheet.create({
       width: 0,
       height: 0,
     },
-    shadowOpacity:  0.17,
+    shadowOpacity: 0.17,
     shadowRadius: 5,
-    elevation: 3
+    elevation: 3,
   },
   shadow: {
     borderRadius: 20,
@@ -134,8 +133,8 @@ const styles = StyleSheet.create({
       width: 0,
       height: 0,
     },
-    shadowOpacity:  0.17,
+    shadowOpacity: 0.17,
     shadowRadius: 5,
-    elevation: 3
+    elevation: 3,
   },
 });

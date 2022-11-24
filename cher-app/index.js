@@ -2,8 +2,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Dashboard from './dashboard';
 import Details from './details';
 import Edit from './edit';
-import Login from './login';
+import Login from '../screens/Authentication/Login';
 import Profile from './profile';
+import BlanckEdit from './blanckEdit';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ const CherApp = () => {
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Details" component={Details} />
       <Stack.Screen name="Edit" component={Edit} />
+      <Stack.Screen name="BlanckEdit" component={BlanckEdit} />
     </Stack.Navigator>
   )
 }

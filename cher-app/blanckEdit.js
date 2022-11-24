@@ -5,10 +5,11 @@ import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { responsiveWidth } from "react-native-responsive-dimensions";
 import {SketchCanvas} from 'rn-perfect-sketch-canvas'
 import {PatientInformationCard,MeteDataCard,Toolbar,InstaZoomable, ZoomableNormal} from "../components"
+import { images } from "../constants";
 // ⚠️ recycle waring apper will chage in future
 import ChatBoxModel from './../components/chatboxModel';
 
-const Edit = () => {
+const BlanckEdit = () => {
   
   const [showToolBar,setShowToolBar] = useState(false);
   const [isDraw,setIsDraw] = useState(false);
@@ -21,7 +22,7 @@ const Edit = () => {
     return(
       <Box flex={1}>
             <Image
-              source={require("../assets/images/form-sm.png")}
+              source={images.whitebg}
               style={[{ flex: 1, width: "100%" }]}/>
             <SketchCanvas
               ref={canvaRef}
@@ -150,4 +151,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Edit;
+export default BlanckEdit;

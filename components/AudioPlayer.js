@@ -1,4 +1,4 @@
-import {StyleSheet,Text,View,TouchableOpacity,Animated} from "react-native";
+import {StyleSheet,Text,View,TouchableOpacity,Animated,} from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import { Entypo } from "@expo/vector-icons";
 import { Audio } from "expo-av";
@@ -13,6 +13,7 @@ const Playback = ({ audiourl, sendername }) => {
   // Loding states for uses in error hadling and network issue for the audio player
   const [Loading, SetLoading] = React.useState(false);
   const [duration, setDuration] = useState(0);
+
   const [totalduration, setTotalDuration] = useState(0);
 
   //   dumy audio local data
@@ -101,6 +102,16 @@ const Playback = ({ audiourl, sendername }) => {
       }
     } catch (error) {}
   };
+
+  const rePlayPositionchanger = async () => {
+    try {
+      const result = await sound?.current.getStatusAsync();
+      if (result.isLoaded) {
+        sound?.current.setPositionAsync(Math.floor(0 * totalduration));
+        setPlay(false);
+      }
+    } catch (error) {}
+  };
   return (
     <View style={styles.maincontainer}>
       <Text style={styles.nameText}>{sendername}</Text>
@@ -136,7 +147,10 @@ const Playback = ({ audiourl, sendername }) => {
           }}
           onValueChange={(e) => {
             if (e >= 0.99) {
-              setPlay(false);
+              console.log("completed");
+              PauseAudio().then(() => {
+                rePlayPositionchanger();
+              });
             }
           }}
         />

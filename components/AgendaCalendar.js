@@ -1,103 +1,15 @@
 import {TimelineCalendar } from '@howljs/calendar-kit';
 import React, { useState } from 'react';
-import {Dimensions, SafeAreaView,StatusBar,StyleSheet,Text,TouchableOpacity,View} from 'react-native';
+import {SafeAreaView,StatusBar,StyleSheet,Text,TouchableOpacity,View} from 'react-native';
 import "react-native-haptic-feedback"
+import { SIZE,dumyData,COLORS} from '../constants';
 
-// dumy array of obj data
-const exampleEvents = [
-  {
-    id: '1',
-    title: 'Nick-Diabetic Retinopathy',
-    start: '2022-11-21T08:00:05.313Z',
-    end: '2022-11-21T10:00:05.313Z',
-    color: 'rgba(173, 216, 230, .7)',
-  },
-  {
-    id: '2',
-    title: 'Dani-Glaucoma',
-    start: '2022-11-21T11:00:05.313Z',
-    end: '2022-11-21T13:00:05.313Z',
-    color: 'rgba(0, 115, 174, .7)',
-  },
-  {
-    id: '1',
-    title: 'Nick-Diabetic Retinopathy',
-    start: '2022-11-22T09:00:05.313Z',
-    end: '2022-11-22T11:00:05.313Z',
-    color: 'rgba(173, 216, 230, .7)',
-  },
-  {
-    id: '2',
-    title: 'Dani-Glaucoma',
-    start: '2022-11-22T13:00:05.313Z',
-    end: '2022-11-22T14:00:05.313Z',
-    color: 'rgba(0, 115, 174, .7)',
-  },
-  {
-    id: '1',
-    title: 'Nick-Diabetic Retinopathy',
-    start: '2022-11-23T09:00:05.313Z',
-    end: '2022-11-23T12:00:05.313Z',
-    color: 'rgba(173, 216, 230, .7)',
-  },
-  {
-    id: '2',
-    title: 'Dani-Glaucoma',
-    start: '2022-11-24T08:00:05.313Z',
-    end: '2022-11-24T14:00:05.313Z',
-    color: 'rgba(0, 115, 174, .7)',
-  },
-  {
-    id: '1',
-    title: 'Nick-Diabetic Retinopathy',
-    start: '2022-11-25T10:00:05.313Z',
-    end: '2022-11-25T12:00:05.313Z',
-    color: 'rgba(173, 216, 230, .7)',
-  },
-  {
-    id: '2',
-    title: 'Dani-Glaucoma',
-    start: '2022-11-26T11:00:05.313Z',
-    end: '2022-11-26T13:00:05.313Z',
-    color: 'rgba(0, 115, 174, .7)',
-  },
-  {
-    id: '1',
-    title: 'Nick-Diabetic Retinopathy',
-    start: '2022-11-26T09:00:05.313Z',
-    end: '2022-11-26T13:00:05.313Z',
-    color: 'rgba(173, 216, 230, .7)',
-  },
-  {
-    id: '2',
-    title: 'Dani-Glaucoma',
-    start: '2022-11-27T11:00:05.313Z',
-    end: '2022-11-27T14:00:05.313Z',
-    color: 'rgba(0, 115, 174, .7)',
-  },
-  {
-    id: '3',
-    title: 'Jhonkenny-Amblyopia',
-    start: '2022-11-28T08:00:05.313Z',
-    end: '2022-11-28T10:00:05.313Z',
-    color: 'rgba(0, 115, 174, .7)',
-  },
-  {
-    id: '4',
-    title: 'jack-Strabismus',
-    start: '2022-11-28T11:00:05.313Z',
-    end: '2022-11-28T14:00:05.313Z',
-    color: 'rgba(173, 216, 230, .7)',
-  },
-];
-// window width only used in a popup center position
-const windowWidth = Dimensions.get("window").width
 const AgendaCalendar = ({initialDate}) => {
   // popup states [show,particular event obj] 
   const [popUpShowBool,setPopUpShowBool] = useState(false);
   const [popTitle,setPopTitle] = useState();
   // event making states  
-  const [events, setEvents] = useState(exampleEvents);
+  const [events, setEvents] = useState(dumyData.agendaEvents);
   const [selectedEvent, setSelectedEvent] = useState();
 
   const _onLongPressEvent = (event) => {
@@ -124,7 +36,7 @@ const AgendaCalendar = ({initialDate}) => {
     return (
       <View style={styles.footer}>
         <TouchableOpacity style={styles.outLineButton} onPress={_onPressCancel}>
-          <Text style={[styles.btnText,{color:'#0073AE'}]}>Cancel</Text>
+          <Text style={[styles.btnText,{color:COLORS.secondaryColor}]}>Cancel</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={_onPressSubmit}>
           <Text style={styles.btnText}>Save</Text>
@@ -160,10 +72,10 @@ const AgendaCalendar = ({initialDate}) => {
           dragHourBorderColor: '#001253',
           dragHourBackgroundColor: 'red',
           editIndicatorColor: '#FFF',
-          todayName:{color:"#0073AE"},
+          todayName:{color:COLORS.secondaryColor},
           todayNumber:{color:"white"},
-          todayNumberContainer:{backgroundColor:'#0073AE'},
-          nowIndicatorColor:"#0073AE"
+          todayNumberContainer:{backgroundColor:COLORS.secondaryColor},
+          nowIndicatorColor:COLORS.secondaryColor
         }}
       />
      </View>
@@ -205,7 +117,7 @@ const styles = StyleSheet.create({
     height: 45,
     paddingHorizontal: 24,
     alignItems:'center',
-    backgroundColor: '#0073AE',
+    backgroundColor: COLORS.secondaryColor,
     justifyContent: 'center',
     borderRadius: 5,
     marginHorizontal: 8,
@@ -215,7 +127,7 @@ const styles = StyleSheet.create({
     width:120,
     height: 45,
     borderWidth:2,
-    borderColor:"#0073AE",
+    borderColor:COLORS.secondaryColor,
     paddingHorizontal: 24,
     borderRadius:5,
     alignItems:'center',
@@ -227,11 +139,11 @@ const styles = StyleSheet.create({
   eventPop:{
    position:'absolute',
    bottom:70,
-   left:windowWidth/2 - 270/2,
+   left:SIZE.width/2 - 250/2,
    width:250,
    height:50,
    borderRadius:10,
-   backgroundColor:"#40CDEB",
+   backgroundColor:COLORS.primarColor,
    alignItems:'center',
    justifyContent:'center'
   },

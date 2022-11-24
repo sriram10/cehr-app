@@ -1,94 +1,39 @@
-import { useNavigation } from "@react-navigation/native";
-import {
-  Box,
-  Text,
-  Heading,
-  HStack,
-  VStack,
-  ScrollView,
-} from "native-base";
-import {
-  View,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native"
-import GoBack from "./goback";
-import Header from "./header"
-
+import { useNavigation} from "@react-navigation/native";
+import {Box,Heading,HStack,VStack,ScrollView,} from "native-base";
+import {View,StyleSheet,} from "react-native"
+import {Header,PatientInformationCard,FormLableCard,GoBack} from "../components"
+import {images} from "../constants"
 
 const Profile = () => {
   const { navigate } = useNavigation();
   const onViewDetail = () => {
     navigate('Details')
   }
-
+  const onViewEdit = () => {
+    navigate('BlanckEdit')
+  }
   return (
     <View style={styles.root}>
       <Header />
-
       <Box p={4}>
         <GoBack />
         <HStack space={4} mt={2}>
           <Box flex={2} />
-          <Box flex={1} p={4} rounded={'md'} bg='white' shadow={3}>
-            <Heading size={'xs'} mb={2}>Patient Information</Heading>
-            <HStack mt={2} space={4}>
-              <VStack space={1}>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Name</Text>
-                  <Text fontSize={"xs"}>Wanda	Morrison</Text>
-                </HStack>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>File Number</Text>
-                  <Text fontSize={"xs"}>DC545930</Text>
-                </HStack>
-              </VStack>
-              <VStack space={1}>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Age</Text>
-                  <Text fontSize={"xs"}>34</Text>
-                </HStack>
-                <HStack space={2}>
-                  <Text fontSize={"xs"} color={'gray.500'}>Diabetic</Text>
-                  <Text fontSize={"xs"}>No</Text>
-                </HStack>
-              </VStack>
-            </HStack>
-          </Box>
+         <PatientInformationCard name={"Wanda	Morrison"} fileNumber={"DC545930"} age={34} diabetic={"NO"}/>
         </HStack>
       </Box>
-
-
       <ScrollView flex={1} px={4} >
         <Heading size={'md'}>All Forms</Heading>
         <VStack space={6} mt={2}>
           {
-            [1,2,3,4,5,6].map((d, i) => (
+            [0,1,2,3,4,5].map((d, i) => (
               <HStack key={i} space={6}>
-                <TouchableOpacity style={{ flex: 1 }} onPress={onViewDetail}>
-                  <Image
-                    source={require('../assets/images/form-sm.png')}
-                    style={{ flex: 1, width: '100%' }}
-                  />
-                  <Box h={6} px={4} style={{ backgroundColor: '#BFDCEB', }}>
-                    <Text size={'sm'}>Form 0{d} - Cataract 0{d}</Text>
-                  </Box>
-                </TouchableOpacity>
-                <TouchableOpacity style={{ flex: 1 }} onPress={onViewDetail}>
-                  <Image
-                    source={require('../assets/images/form-sm.png')}
-                    style={{ flex: 1, width: '100%' }}
-                  />
-                  <Box h={6} px={4} style={{ backgroundColor: '#BFDCEB', }}>
-                    <Text size={'sm'}>Form 0{d+2} - Cataract 0{d+1}</Text>
-                  </Box>
-                </TouchableOpacity>
+                <FormLableCard d={d}  imageSrc={(i===0)?images.whitebg:images.formSM} onPress={(i===0)?onViewEdit:onViewDetail}/>
+                <FormLableCard d={d+1} imageSrc={images.formSM} onPress={onViewDetail}/>
               </HStack>
             ))
           }
         </VStack>
-
       </ScrollView>
     </View>
   )

@@ -7,52 +7,18 @@ import {
   Platform,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
+import {Header,LineChartcard, MiniCard,AgendaCalendar} from "../components"
+import {dumyData} from "../constants";
 import { responsiveWidth } from "react-native-responsive-dimensions";
-import { LineChart } from "react-native-gifted-charts";
-import Header from "./header";
-import AgendaCalendar from "./AgendaCalendar";
-
-const chartData = [
-  {value:30},
-  {value:20},
-  {value:50},
-  {value:80},
-  {value:90},
-  {value:76},
-];
-
-const ActionButton = () => {
-  return (
-    <Box flex={1} alignItems={'flex-end'}>
-      <Ionicons name='ios-chevron-forward' size={16} color='#888' />
-    </Box>
-  )
-}
-
-const tableData = {
-  head: ['Name', 'Age', 'Gender', 'Diagnosis', 'Waiting Time', <Box alignItems={'flex-end'}>Action</Box>],
-  rows: [
-    ['Wanda	Morrison', 34, 'Female', 'Cateract', '15:30mins', <ActionButton />],
-    ['Wanda	Morrison', 34, 'Female', 'Cateract', '15:30mins', <ActionButton />],
-    ['Wanda	Morrison', 34, 'Female', 'Cateract', '15:30mins', <ActionButton />],
-    ['Wanda	Morrison', 34, 'Female', 'Cateract', '15:30mins', <ActionButton />],
-    ['Wanda	Morrison', 34, 'Female', 'Cateract', '15:30mins', <ActionButton />],
-    ['Wanda	Morrison', 34, 'Female', 'Cateract', '15:30mins', <ActionButton />],
-    ['Wanda	Morrison', 34, 'Female', 'Cateract', '15:30mins', <ActionButton />],
-    ['Wanda	Morrison', 34, 'Female', 'Cateract', '15:30mins', <ActionButton />],
-    ['Wanda	Morrison', 34, 'Female', 'Cateract', '15:30mins', <ActionButton />],
-    ['Wanda	Morrison', 34, 'Female', 'Cateract', '15:30mins', <ActionButton />],
-    ['Wanda	Morrison', 34, 'Female', 'Cateract', '15:30mins', <ActionButton />],
-    ['Wanda	Morrison', 34, 'Female', 'Cateract', '15:30mins', <ActionButton />],
-  ]
-}
-
 const Dashboard = () => {
-  const { navigate } = useNavigation()
 
+  const { navigate } = useNavigation()
   const onRowClick = () => {
     navigate('Profile')
   }
+  const months = ["January","February","March","April","Mey","June","July","August","September","October","November","December"]
+
+
 
   const getTime = () => {
     var hours = new Date().getHours();
@@ -69,9 +35,7 @@ const Dashboard = () => {
   return (
     <View style={styles.root}>
       <Header />
-
       <ScrollView flex={1} p={4}>
-
         <Heading size={'md'} mb={2}>Welcome, Dr. John Doe</Heading>
         <HStack alignItems={'center'} mb={4}>
           <Box flex={1} flexDirection={'row'} alignItems={'center'}>
@@ -81,7 +45,7 @@ const Dashboard = () => {
                 color='#444'
                 size={17}
               />
-              <Text ml={2} color={'gray.600'}>October {new Date().getDate()},2022</Text>
+              <Text ml={2} color={'gray.600'}>{months[new Date().getMonth()]} {new Date().getDate()},2022</Text>
             </Box>
             <Box flexDirection={'row'} ml={4} alignItems={'center'}>
               <Ionicons
@@ -103,73 +67,18 @@ const Dashboard = () => {
         </HStack>
 
         <HStack pb={4} space={4} justifyContent="center">
-          <Box flex={2} p={4} rounded={'md'} bg='white'>
-            <LineChart
-              data={chartData}
-              color={'#0073AE'}
-              dataPointsColor={'#0073AE'}
-              startFillColor={'#80B9D6'}
-              endFillColor={'#E5F1F7'}
-              xAxisColor={'#0073AE'}
-              yAxisColor={'#0073AE'}
-              yAxisLabelWidth={20}
-              curved
-              areaChart
-              isAnimated
-              adjustToWidth
-              width={responsiveWidth(45)}
-              yAxisTextStyle={{
-                fontSize: 10,
-                color: '#4096C2'
-              }}
-              />
-          </Box>
+          <LineChartcard data={dumyData.chartData} width={responsiveWidth(45)}/>
           <VStack space={4} justifyContent="center" flex={1.5}>
-            <Box flex={1} p={4} rounded={'md'} bg='white' overflow={'hidden'} justifyContent='center'>
-              <View style={{ position: 'absolute', right: 0, bottom: -15 }}>
-                <Ionicons
-                  name="ios-pulse-outline"
-                  color={'#e5f1f7'}
-                  size={100}
-                />
-              </View>
-              <Box>
-                <Ionicons
-                  name="ios-people-outline"
-                  color={'#939598'}
-                  size={20}
-                />
-                <Text color={'gray.600'}>Patients Registered</Text>
-                <Heading mt={2} color={'blue.700'}>188</Heading>
-              </Box>
-            </Box>
-            <Box flex={1} p={4} rounded={'md'} bg='white' overflow={'hidden'} justifyContent='center'>
-              <View style={{ position: 'absolute', right: -30, bottom: -30 }}>
-                <Ionicons
-                  name="ios-time-outline"
-                  color={'#e5f1f7'}
-                  size={140}
-                />
-              </View>
-              <Box>
-                <Ionicons
-                  name="ios-stopwatch-outline"
-                  color={'#939598'}
-                  size={20}
-                />
-                <Text color={'gray.600'}>Waiting for Doctor</Text>
-                <Heading mt={2} color={'blue.700'}>124</Heading>
-              </Box>
-            </Box>
+            <MiniCard iconName={"ios-people-outline"} bgIconName={"ios-pulse-outline"} title={"patients Registered"} count={188}/>
+            <MiniCard iconName={"ios-stopwatch-outline"} bgIconName={"ios-time-outline"} title={"Waiting for Doctor"} count={125}/> 
           </VStack>
         </HStack>
-
         <Heading size={'sm'} mb={2}>Your Next Patients</Heading>
         <Box rounded={'md'} bg='white' flex={1}>
           <VStack>
             <Box style={styles.tableHead}>
               {
-                tableData.head.map((d, i) => (
+                dumyData.tableData.head.map((d, i) => (
                   <Box key={i} flex={i === 0 ? 1.5 : 1}>
                     {
                       ['string', 'number'].includes(typeof d) ?
@@ -181,7 +90,7 @@ const Dashboard = () => {
               }
             </Box>
             {
-              tableData.rows.map((rowData, i) => (
+              dumyData.tableData.rows.map((rowData, i) => (
                 <TouchableOpacity key={i} style={styles.tableBody} onPress={onRowClick}>
                   <HStack flex={1}>
                     {
@@ -202,7 +111,7 @@ const Dashboard = () => {
           </VStack>
         </Box>
         <View style={styles.agendaCantainer}>
-             <Heading size={'sm'} mb={2}>Agenda</Heading>
+             <Heading size={'sm'} mb={2}>Your Agenda</Heading>
              <AgendaCalendar/>
         </View>
       </ScrollView>
