@@ -111,8 +111,8 @@ const Dashboard = () => {
           </VStack>
         </Box>
         <View style={styles.agendaCantainer}>
-             <Heading size={'sm'} mb={2}>Your Agenda</Heading>
-             <AgendaCalendar/>
+             <Heading size={'sm'} mb={2}></Heading>
+             {/* <AgendaCalendar/> */}
         </View>
       </ScrollView>
 

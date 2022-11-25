@@ -24,6 +24,12 @@ const tableData = {
     ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
     ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
     ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
+    ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
+    ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
+    ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
+    ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
+    ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
+    ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
   
   ],
 };
