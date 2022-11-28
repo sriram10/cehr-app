@@ -1,4 +1,4 @@
-import { Box, ScrollView, Text, Heading, HStack, VStack } from "native-base";
+import { Box} from "native-base";
 import { ActionButton } from "../components";
 export const chartData = [
   { value: 30 },

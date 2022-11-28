@@ -11,14 +11,12 @@ import ChatBoxModel from './../components/chatboxModel';
 
 const BlanckEdit = () => {
   
-  const [showToolBar,setShowToolBar] = useState(false);
-  const [isDraw,setIsDraw] = useState(false);
-  const [instaZoom,setInstaZoom] = useState(true);
+  const [isDraw,setIsDraw] = useState(true);
 
   const { goBack } = useNavigation();
   const canvaRef = useRef(null);
 
-  const Childcon = ()=>{
+  const Childcon = ({canvaRef})=>{
     return(
       <Box flex={1}>
             <Image
@@ -27,10 +25,10 @@ const BlanckEdit = () => {
             <SketchCanvas
               ref={canvaRef}
               strokeColor={"#0073AE"}
-              strokeWidth={(isDraw)?8:0} 
+              strokeWidth={(isDraw)?5:0} 
               containerStyle={[styles.sketchContainer,StyleSheet.absoluteFill]}   
       />
-            <View style={StyleSheet.absoluteFill}>
+            <View style={{}}>
             <ChatBoxModel/>
             </View>
           </Box>
@@ -50,15 +48,21 @@ const BlanckEdit = () => {
       </View>
       <Box flex={1}>
         <Box p={4} flex={1} w={responsiveWidth(100)}>
-          {/* <InstaZoomable ChildNode={<Childcon/>}/> */}
-          <ZoomableNormal ChildCon={<Childcon/>} iszoomable={!isDraw}/>
+          <ZoomableNormal ChildCon={<Childcon canvaRef={canvaRef}/>} iszoomable={!isDraw}/>
         </Box>
       </Box>
       <View style={styles.btnContainer}>
-        <TouchableOpacity style={styles.outbtnStyle} onPress={() => goBack()}>
+        <TouchableOpacity style={styles.outbtnStyle} onPress={() => 
+        {
+          canvaRef?.current?.reset();
+          goBack();}}>
           <Text style={{ color: "#0073AE" }}>Cancel</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnStyle} onPress={() => goBack()}>
+        <TouchableOpacity style={styles.btnStyle} onPress={() => 
+        {
+          
+          canvaRef?.current?.reset();
+          goBack()}}>
           <Text style={styles.btnText}>Save</Text>
         </TouchableOpacity>
       </View>

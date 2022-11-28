@@ -1,23 +1,21 @@
 import { useNavigation } from "@react-navigation/native";
 import { Box, Text, Heading, HStack} from "native-base";
-import React, { useState,useRef, useCallback } from "react";
+import React, { useState,useRef } from "react";
 import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { responsiveWidth } from "react-native-responsive-dimensions";
 import {SketchCanvas} from 'rn-perfect-sketch-canvas'
-import {PatientInformationCard,MeteDataCard,Toolbar,InstaZoomable, ZoomableNormal} from "../components"
+import {PatientInformationCard,MeteDataCard,Toolbar, ZoomableNormal} from "../components"
 // ⚠️ recycle waring apper will chage in future
 import ChatBoxModel from './../components/chatboxModel';
 
 const Edit = () => {
   
-  const [showToolBar,setShowToolBar] = useState(false);
-  const [isDraw,setIsDraw] = useState(false);
-  const [instaZoom,setInstaZoom] = useState(true);
+  const [isDraw,setIsDraw] = useState(true);
 
   const { goBack } = useNavigation();
   const canvaRef = useRef(null);
 
-  const Childcon = ()=>{
+  const Childcon = ({canvaRef})=>{
     return(
       <Box flex={1}>
             <Image
@@ -26,10 +24,10 @@ const Edit = () => {
             <SketchCanvas
               ref={canvaRef}
               strokeColor={"#0073AE"}
-              strokeWidth={(isDraw)?8:0} 
+              strokeWidth={(isDraw)?5:0} 
               containerStyle={[styles.sketchContainer,StyleSheet.absoluteFill]}   
       />
-            <View style={StyleSheet.absoluteFill}>
+            <View style={{}}>
             <ChatBoxModel/>
             </View>
           </Box>
@@ -49,15 +47,14 @@ const Edit = () => {
       </View>
       <Box flex={1}>
         <Box p={4} flex={1} w={responsiveWidth(100)}>
-          {/* <InstaZoomable ChildNode={<Childcon/>}/> */}
-          <ZoomableNormal ChildCon={<Childcon/>} iszoomable={!isDraw}/>
+          <ZoomableNormal ChildCon={<Childcon  canvaRef={canvaRef}/>} iszoomable={!isDraw}/>
         </Box>
       </Box>
       <View style={styles.btnContainer}>
-        <TouchableOpacity style={styles.outbtnStyle} onPress={() => goBack()}>
+        <TouchableOpacity style={styles.outbtnStyle} onPress={() => {goBack(); canvaRef?.current?.reset();}}>
           <Text style={{ color: "#0073AE" }}>Cancel</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnStyle} onPress={() => goBack()}>
+        <TouchableOpacity style={styles.btnStyle} onPress={() =>{ goBack(); canvaRef?.current?.reset();}}>
           <Text style={styles.btnText}>Save</Text>
         </TouchableOpacity>
       </View>

@@ -1,10 +1,8 @@
 import 'react-native-gesture-handler';
-// import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import { NativeBaseProvider, Text, Box } from "native-base";
 import { NavigationContainer } from '@react-navigation/native';
 import CherApp from './cher-app';
-import { useEffect } from 'react';
 
 export default function App() {
   

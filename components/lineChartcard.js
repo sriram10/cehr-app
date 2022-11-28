@@ -1,16 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Box } from "native-base";
-import { LineChart } from "react-native-gifted-charts";
+// import { LineChart } from "react-native-gifted-charts";
 import {Calendar} from "react-native-calendars"
 const LineChartcard = ({ data, width }) => {
   const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'blue'};
   const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
   const workout = {key: 'workout', color: 'green'};
   <Calendar
-  theam={{
-    dayTextColor:"red"
-  }}
+  enableSwipeMonths
+  hideArrows={true}
   markingType={'multi-dot'}
   markedDates={{
     '2022-11-25': {dots: [vacation, massage, workout]},
@@ -21,8 +20,8 @@ console.log('selected day', day);
 }}
 
 theme={{
-
-  dayTextColor:"blue"
+  
+  
 }}
 />
   return (
@@ -47,6 +46,7 @@ theme={{
         }}
       /> */}
        <Calendar
+      
       markingType={'multi-dot'}
       markedDates={{
         '2022-11-25': {dots: [vacation, massage, workout]},
