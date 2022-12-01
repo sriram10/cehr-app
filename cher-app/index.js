@@ -5,6 +5,7 @@ import Edit from './edit';
 import Login from '../screens/Authentication/Login';
 import Profile from './profile';
 import BlanckEdit from './blanckEdit';
+import MainProfile from './MainProfile';
 
 const Stack = createStackNavigator();
 
@@ -15,7 +16,7 @@ const CherApp = () => {
     }}>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Dashboard" component={Dashboard} />
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Profile" component={MainProfile} />
       <Stack.Screen name="Details" component={Details} />
       <Stack.Screen name="Edit" component={Edit} />
       <Stack.Screen name="BlanckEdit" component={BlanckEdit} />

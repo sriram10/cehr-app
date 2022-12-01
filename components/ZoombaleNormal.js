@@ -1,8 +1,9 @@
 import {StyleSheet,View,} from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {useSharedValue,useAnimatedStyle,withTiming,useAnimatedReaction,} from "react-native-reanimated";
-import { SIZE } from "../constants";
-const sizew=SIZE.width-20 ; //main container size 
+import { responsiveWidth } from 'react-native-responsive-dimensions';
+const sizew=(responsiveWidth(70)) ; //main container size 
+const sizeh=(responsiveWidth(70))*1.3 ; //main container size 
 const ZoomableNormal = ({ ChildCon,iszoomable}) => {
   // states
   // should change the value of the size=child container width and height
@@ -20,7 +21,7 @@ const ZoomableNormal = ({ ChildCon,iszoomable}) => {
 
   const centerFocalImage = {
     x: sizew / 2,
-    y: sizew / 2,
+    y: sizeh / 2,
   };
   // for scalling validation
   useAnimatedReaction(
@@ -97,7 +98,7 @@ const ZoomableNormal = ({ ChildCon,iszoomable}) => {
           }
         } else {
           if (
-            e.y - sizew - (e.y - sizew) * animationFinalScaling.value >
+            e.y - sizeh - (e.y - sizeh) * animationFinalScaling.value >
             -(e.translationY + contextTrans.value.y)
           ) {
             animationPanTransY.value = e.translationY + contextTrans.value.y;
@@ -130,10 +131,12 @@ const ZoomableNormal = ({ ChildCon,iszoomable}) => {
       <GestureDetector gesture={composed}>
         <Animated.View
           style={[
-            {
+            styles.shadow,
+            { 
+              justifyContent:"center",
               width: sizew,
-              height: sizew,
-              backgroundColor: "rgba(205, 242, 250, 0.8)",
+              height: sizew*1.3,
+              
             },
             animationScaleStyle,
           ]}
@@ -148,8 +151,19 @@ export default ZoomableNormal;
 const styles = StyleSheet.create({
   mainConatainer: {
     width: sizew,
-    height: sizew,
+    height: sizew*1.3,
     overflow: "hidden",
+    // backgroundColor:'red'
   },
+  shadow:{
+    shadowColor: "grey",
+shadowOffset: {
+width: 0,
+height: -1,
+},
+shadowOpacity:  .5,
+shadowRadius: 1,
+elevation: 0
+  }
 
 });

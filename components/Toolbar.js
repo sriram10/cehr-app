@@ -19,7 +19,7 @@ const Toolbar = ({ undoCallBack, redoCallback,zoomCallback,drawCallback, isDraw 
             setShowToolBar(true);
           }}
         >
-          <Text style={styles.btnText}>Scribble</Text>
+          <Text style={[styles.btnText,{color:"white"}]}>Options</Text>
           <MaterialCommunityIcons
             name="draw"
             size={24}
@@ -37,24 +37,25 @@ const Toolbar = ({ undoCallBack, redoCallback,zoomCallback,drawCallback, isDraw 
           }}
         >
           <View style={styles.toolbar}>
+            
+
+            <TouchableOpacity style={[styles.toolBarBtn,(!isDraw)&&{ backgroundColor: COLORS.secondaryColor80 }]} onPress={() => onClick({ callback: zoomCallback, draw: false })}>
+              <Ionicons name="md-crop-outline" size={24} color={(!isDraw)? "white":"black"}/>
+              <Text style={[styles.btnText,(!isDraw)&&{ color:"white"}]}>Zoom</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[styles.toolBarBtn,(isDraw)&&{ backgroundColor: COLORS.secondaryColor80}]} onPress={() => onClick({ callback: drawCallback, draw: true })}>
+              <Ionicons name="pencil" size={24} color={(isDraw)? "white":"black"} />
+              <Text style={[styles.btnText,(isDraw)&&{ color:"white"}]}>Draw</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.toolBarBtn} onPress={undoCallBack}>
-              <Ionicons name="arrow-undo" size={24} color="white" />
+              <Ionicons name="arrow-undo" size={24} color="rgba(0, 0, 0, 0.6)" />
               <Text style={styles.btnText}>Undo</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.toolBarBtn} onPress={redoCallback}>
-              <Ionicons name="arrow-redo" size={24} color="white" />
+              <Ionicons name="arrow-redo" size={24} color="rgba(0, 0, 0, 0.6)" />
               <Text style={styles.btnText}>Redo</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={[styles.toolBarBtn,(!isDraw)&&{ backgroundColor: COLORS.secondaryColor80 }]} onPress={() => onClick({ callback: zoomCallback, draw: false })}>
-              <Ionicons name="md-crop-outline" size={24} color="white"/>
-              <Text style={[styles.btnText,{color:"white"}]}>Zoom</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={[styles.toolBarBtn,(isDraw)&&{ backgroundColor: COLORS.secondaryColor80}]} onPress={() => onClick({ callback: drawCallback, draw: true })}>
-              <Ionicons name="pencil" size={24} color="white" />
-              <Text style={[styles.btnText,{color:"white"}]}>Draw</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -63,7 +64,7 @@ const Toolbar = ({ undoCallBack, redoCallback,zoomCallback,drawCallback, isDraw 
                 setShowToolBar(false);
               }}
             >
-              <MaterialIcons name="cancel" size={24} color="white" />
+              <MaterialIcons name="cancel" size={24} color={COLORS.secondaryColor} />
             </TouchableOpacity>
           </View>
         </View>
@@ -78,16 +79,17 @@ const styles = StyleSheet.create({
   btnStyle: {
     flexDirection: "row",
     paddingHorizontal: 20,
-    paddingVertical: 10,
+  
     backgroundColor: "#0073AE",
     width: 150,
+    height:45,
     alignItems: "center",
     justifyContent: "center",
     marginLeft: 30,
     borderRadius: 5,
   },
   btnText: {
-    color: "white",
+    color: "black",
   },
   toolbarContainer: {
     alignItems: "flex-end",
@@ -98,9 +100,9 @@ const styles = StyleSheet.create({
     height: 50,
     width: 400,
     justifyContent: "center",
-    marginRight: SIZE.width / 2 - 200,
+    marginLeft:100,
     borderRadius: 10,
-    backgroundColor: "#00BCE4",
+    backgroundColor: "white",
     flexDirection: "row",
     alignItems: "center",
   },
@@ -122,5 +124,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     opacity: 0.9,
     marginLeft: 5,
+    // backgroundColor:"blue"
   },
 });

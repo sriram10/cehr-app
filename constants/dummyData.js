@@ -120,6 +120,12 @@ const agendaEvents = [
     color: "rgba(173, 216, 230, .7)",
   },
 ];
+const imagevaluearr= [require("../assets/images/forms/ClinicalDoctorwhitepage.jpg"),
+  require("../assets/images/forms/CASARecordForm.jpg"),
+  require("../assets/images/forms/ClinicalRefractiveAssessmentpage.jpg"),
+  require("../assets/images/forms/DFRPatientMedicalRecord.jpg"),
+  require("../assets/images/forms/PatientMedicalRecordContinuationForm.jpg"),
+  require("../assets/images/forms/PatientMedicalRecordForm.jpg") ]
 
-const dumyData = { chartData, tableData, agendaEvents };
+const dumyData = { chartData, tableData, agendaEvents,imagevaluearr};
 export default dumyData;

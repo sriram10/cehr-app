@@ -10,10 +10,14 @@ import AgendaCalendar from "./AgendaCalendar";
 import Toolbar from "./Toolbar";
 import InstaZoomable from './InstaZoomable';
 import ZoomableNormal from './ZoombaleNormal';
+import BtnIcons from './BtnIcons';
+import SideBar from './SideBar';
+import SideBarRight from './SidebarRight';
 
 
 
 export {
+  BtnIcons,
   Header,
   ActionButton,
   LineChartcard,
@@ -25,5 +29,7 @@ export {
   AgendaCalendar,
   Toolbar,
   InstaZoomable,
-  ZoomableNormal
+  ZoomableNormal,
+  SideBar,
+  SideBarRight,
 };

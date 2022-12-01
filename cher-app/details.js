@@ -6,6 +6,7 @@ import { responsiveWidth } from "react-native-responsive-dimensions";
 import { useNavigation} from "@react-navigation/native";
 import {Header,PatientInformationCard,MeteDataCard,GoBack,} from "../components";
 import { SIZE,images} from "../constants";
+import BtnIcons from './../components/BtnIcons';
 
 
 // dummy data for list rendering
@@ -108,18 +109,7 @@ const Details = () => {
                   <Heading size={"md"}>
                     Form 0{item} - Cataract 0{item}
                   </Heading>
-                  <Button
-                    onPress={() => {
-                      onViewEdit();
-                    }}
-                    variant={"outline"}
-                    size={"sm"}
-                    leftIcon={
-                      <Ionicons name="ios-pencil" size={18} color={"#888"} />
-                    }
-                  >
-                    Edit
-                  </Button>
+                 <BtnIcons onPress={onViewEdit} title={"Edit"}/>
                 </Box>
                 <Box flex={1}>
                   <Image
