@@ -11,6 +11,7 @@
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@howljs/calendar-kit": "^1.7.1",
+    "@react-native-community/hooks": "^2.8.1",
     "@react-native-community/slider": "4.2.3",
     "@react-native-masked-view/masked-view": "0.2.7",
     "@react-navigation/native": "^6.0.13",
@@ -29,6 +30,7 @@
     "react-native-gesture-handler": "~2.5.0",
     "react-native-gifted-charts": "^1.2.41",
     "react-native-haptic-feedback": "^1.14.0",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-material-textfield-new": "^0.17.5",
     "react-native-reanimated": "~2.9.1",

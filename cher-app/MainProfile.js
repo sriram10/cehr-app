@@ -1,14 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
-import { Box, Text, Heading, HStack } from "native-base";
+import { Box, Text, Heading, HStack, } from "native-base";
 import React, { useState, useRef, useEffect } from "react";
 import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { responsiveWidth } from "react-native-responsive-dimensions";
 import { SketchCanvas } from "rn-perfect-sketch-canvas";
-import {PatientInformationCard,MeteDataCard,Toolbar,ZoomableNormal,SideBar,SideBarRight,} from "../components";
+import {PatientInformationCard,MeteDataCard,Toolbar,ZoomableNormal,SideBar,SideBarRight,GoBack} from "../components";
 // ⚠️ recycle waring apper will chage in future
 import ChatBoxModel from "./../components/chatboxModel";
 import {dumyData} from "../constants"
 import DropDownPage from "../components/DropDownPage";
+import {KeyboardAwareFlatList} from "react-native-keyboard-aware-scroll-view"
 
 const MainProfile = () => {
   const [imageValue, setImageValue] = useState(4);
@@ -39,11 +40,15 @@ const MainProfile = () => {
     );
   };
   return (
+    // <ScrollView style={{}}
+    
     <View style={styles.root}>
       <Box p={4} pt={8}>
         <Heading size={"md"} mt={4}>
           Form 01 - Cataract 01
+          
         </Heading>
+        
         <HStack space={4} mt={4}>
           <MeteDataCard />
           <PatientInformationCard
@@ -54,13 +59,16 @@ const MainProfile = () => {
           />
         </HStack>
       </Box>
+      <View style={{paddingHorizontal:20}}>
+      <GoBack/>
+      </View>
       <View
         style={{
           height: 30,
           width: responsiveWidth(100),
           flexDirection: "row",
           alignItems: "center",
-          marginTop: 30,
+          marginTop: 10,
           marginBottom: 10,
         }}
       >
@@ -98,7 +106,7 @@ const MainProfile = () => {
           <SideBar />
         </View>
       </Box>
-      <View style={styles.btnContainer}>
+      {/* <View style={styles.btnContainer}>
         <TouchableOpacity
           style={styles.outbtnStyle}
           onPress={() => {
@@ -117,8 +125,10 @@ const MainProfile = () => {
         >
           <Text style={styles.btnText}>Save</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
+  
+   
   );
 };
 

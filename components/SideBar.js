@@ -18,7 +18,7 @@ const SideBar = () => {
   const [index, setIndex] = useState();
   const [showLeftSideBard, setShowLeftSideBar] = useState(false);
   useEffect(() => {
-    // changeanimation();
+    changeanimation();
   }, []);
   const animationvalue = useSharedValue(0);
   const changeanimation = () => {
@@ -76,8 +76,8 @@ const animatedStylesRotate = useAnimatedStyle(() => {
             activeOpacity={0.9}
             onPress={changeanimation}
             style={{
-              width: 50,
-              height: 50,
+              width: 100,
+              height: 100,
               alignItems: "center",
               justifyContent: "center",
             }}
@@ -193,7 +193,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderTopLeftRadius:0,
-    borderBottomLeftRadius:0
+    borderBottomLeftRadius:0,
+    overflow:'hidden',
   },
   cardHeader: {
     flexDirection: "row",

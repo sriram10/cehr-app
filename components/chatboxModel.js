@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity,KeyboardAvoidingView } from "react-native";
 import React, { useState,useCallback } from "react";
 import { Feather } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
@@ -49,7 +49,7 @@ const ChatBoxModel = () => {
           }}
           style={[styles.chatBtnBool, styles.shadowProps]}
         >
-          <Entypo name="dots-three-horizontal" size={30} color="white" />
+          <Entypo name="dots-three-horizontal" size={15} color="white" />
         </TouchableOpacity>
       )}
     </View>
@@ -83,14 +83,16 @@ const styles = StyleSheet.create({
     right: 0,
     width: 400,
     height: 500,
-    borderRadius: 20,
-    borderBottomRightRadius: 0,
-    overflow: "hidden",
+    // borderWidth: 1, //StyleSheet.hairlineWidth,
+    // borderColor: "black",
+    // borderRadius: 20,
+    // borderBottomRightRadius: 0,
+    // overflow: "hidden",
   },
   chatBtnBool: {
-    width: 80,
-    height: 60,
-    borderRadius: 20,
+    width: 40,
+    height: 30,
+    borderRadius: 10,
     borderBottomRightRadius: 0,
     backgroundColor: "#00BEE6",
     right: 0,
@@ -112,29 +114,26 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   shadowProps: {
-    borderRadius: 20,
-    borderBottomRightRadius: 0,
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.17,
-    shadowRadius: 5,
-    elevation: 3,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 0,
+    // },
+    // shadowOpacity: 0.17,
+    // shadowRadius: 5,
+   
   },
   shadow: {
-    borderRadius: 20,
-    borderBottomRightRadius: 0,
+    // borderRadius: 20,
+    // borderBottomRightRadius: 0,
 
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.17,
-    shadowRadius: 5,
-    elevation: 3,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 0,
+    // },
+    // shadowOpacity: 0.17,
+    // shadowRadius: 5,
+    // // elevation: 3,
   },
 });

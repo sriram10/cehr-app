@@ -1,12 +1,11 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import {MaterialCommunityIcons,Ionicons,MaterialIcons,} from "@expo/vector-icons";
-import { COLORS, SIZE } from "../constants";
+import { COLORS,} from "../constants";
 
 const Toolbar = ({ undoCallBack, redoCallback,zoomCallback,drawCallback, isDraw }) => {
   const [showToolBar, setShowToolBar] = React.useState(true);
-  console.log(">>> TOOLBAR")
-
+  
   const onClick = ({ callback, draw }) => {
     callback();
   }
@@ -58,14 +57,19 @@ const Toolbar = ({ undoCallBack, redoCallback,zoomCallback,drawCallback, isDraw 
               <Text style={styles.btnText}>Redo</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
+            <TouchableOpacity style={styles.toolBarBtn} onPress={redoCallback}>
+              <Ionicons name="save" size={24} color="rgba(0, 0, 0, 0.6)" />
+              <Text style={styles.btnText}>save</Text>
+            </TouchableOpacity>
+
+            {/* <TouchableOpacity
               style={styles.cancleBtn}
               onPress={() => {
                 setShowToolBar(false);
               }}
             >
               <MaterialIcons name="cancel" size={24} color={COLORS.secondaryColor} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       )}
@@ -98,7 +102,7 @@ const styles = StyleSheet.create({
   },
   toolbar: {
     height: 50,
-    width: 400,
+    width:450,
     justifyContent: "center",
     marginLeft:100,
     borderRadius: 10,

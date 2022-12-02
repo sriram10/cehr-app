@@ -223,12 +223,6 @@ const styles = StyleSheet.create({
   mainConatianer: {
     flex: 1,
     backgroundColor: "white",
-    shadowOpacity: 0.4,
-    shadowRadius: 1,
-    elevation: 1,
-    shadowColor: "#0073AE",
-    borderRadius: 20,
-    borderBottomRightRadius: 0,
     borderWidth: 1, //StyleSheet.hairlineWidth,
     borderColor: "lightblue",
   },
@@ -248,13 +242,13 @@ const styles = StyleSheet.create({
   chatList: {
     padding: 10,
     marginTop: 10,
-    borderTopLeftRadius: 25,
+    // borderTopLeftRadius: 25,
     backgroundColor: "#fff",
   },
   chatbox: {
     flex: 1,
-    backgroundColor: "white",
-    borderRadius: 10,
+    // backgroundColor: "red",
+    // borderRadius: 10,
   },
   chatcard: {
     paddingVertical: 2,
@@ -284,19 +278,18 @@ const styles = StyleSheet.create({
   chatboxinputcon: {
     paddingVertical: 10,
     backgroundColor: "white",
-    borderRadius: 0,
     flexDirection: "row",
     justifyContent: "space-between",
-    shadowColor: "#00BEE6",
-    shadowOffset: {
-      width: 0,
-      height: -2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
-    borderTopColor: "#ccc",
-    borderTopWidth: StyleSheet.hairlineWidth,
+    // shadowColor: "#00BEE6",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: -2,
+    // },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 8,
+    // elevation: 3,
+    // borderTopColor: "#ccc",
+    // borderTopWidth: StyleSheet.hairlineWidth,
   },
   outlinebtn: {
     paddingHorizontal: 20,
@@ -353,6 +346,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 0,
     marginBottom: 3,
     backgroundColor: COLORS.light02,
+    // backgroundColor:"red",
     borderRadius: 10,
     lineHeight: 25,
 

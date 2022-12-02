@@ -47,11 +47,11 @@ const Login = () => {
             <View style={styles.formContainer}>
               <FormControl w="75%" maxW="300px">
                 <FormControl.Label>Doctor ID</FormControl.Label>
-                <Input placeholder="Enter Doctor ID" />
+                <Input placeholder="Enter Doctor ID" style={{backgroundColor:'rgba(255, 255, 255, 0.9)'}}/>
               </FormControl>
               <FormControl w="75%" maxW="300px" marginTop={"2"}>
                 <FormControl.Label>Password</FormControl.Label>
-                <Input placeholder="Enter Password" secureTextEntry />
+                <Input placeholder="Enter Password" secureTextEntry style={{backgroundColor:'rgba(255, 255, 255, 0.9)'}}/>
               </FormControl>
               <Button w="75%" maxW="300px" marginTop={"4"} onPress={onSubmit}>
                 Login
