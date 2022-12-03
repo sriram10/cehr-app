@@ -6562,10 +6562,10 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-calendars@1.1286.0:
-  version "1.1286.0"
-  resolved "https://registry.yarnpkg.com/react-native-calendars/-/react-native-calendars-1.1286.0.tgz#9f865d4d29b4ee700185e8ba3fc548b9137fe072"
-  integrity sha512-ZQ/rmSO6Gx7mjgxkI4G7ZbXFj6E/VFRH2EYOQMctyMvxpCXvW9S/dy29bhysJT/l6UnGvXMkpSMiRqLM3hlLMw==
+react-native-calendars@1.1288.0:
+  version "1.1288.0"
+  resolved "https://registry.yarnpkg.com/react-native-calendars/-/react-native-calendars-1.1288.0.tgz#1ff3ecd9a5f9a8b6ccf2e7c8b38e967413ea08ae"
+  integrity sha512-ZyTghahqUhz0SqF7XOhXiCzUU635ZBIej3N2bg7yAfHfFWu0fAgZZV4elm9Q+eE7v8qrXGo4f+H1w5GtPGl5UQ==
   dependencies:
     hoist-non-react-statics "^3.3.1"
     immutable "^4.0.0-rc.12"

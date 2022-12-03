@@ -7,6 +7,7 @@ const GoBack = () => {
   const { goBack } = useNavigation();
   const onBack = () => {
     goBack();
+    // onPress();
   };
 
   return (

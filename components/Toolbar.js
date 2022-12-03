@@ -36,9 +36,9 @@ const Toolbar = ({ undoCallBack, redoCallback,zoomCallback,drawCallback, isDraw 
           }}
         >
           <View style={styles.toolbar}>
-            
-
-            <TouchableOpacity style={[styles.toolBarBtn,(!isDraw)&&{ backgroundColor: COLORS.secondaryColor80 }]} onPress={() => onClick({ callback: zoomCallback, draw: false })}>
+            {/* make changes in that*/}
+            <View style={{flexDirection:"row",borderWidth:StyleSheet.hairlineWidth,padding:4,borderRadius:15,borderColor:COLORS.secondaryColor80}}>
+            <TouchableOpacity style={[styles.toolBarBtn,{paddingLeft:1},(!isDraw)&&{ backgroundColor: COLORS.secondaryColor80 }]} onPress={() => onClick({ callback: zoomCallback, draw: false })}>
               <Ionicons name="md-crop-outline" size={24} color={(!isDraw)? "white":"black"}/>
               <Text style={[styles.btnText,(!isDraw)&&{ color:"white"}]}>Zoom</Text>
             </TouchableOpacity>
@@ -47,6 +47,7 @@ const Toolbar = ({ undoCallBack, redoCallback,zoomCallback,drawCallback, isDraw 
               <Ionicons name="pencil" size={24} color={(isDraw)? "white":"black"} />
               <Text style={[styles.btnText,(isDraw)&&{ color:"white"}]}>Draw</Text>
             </TouchableOpacity>
+            </View>
             <TouchableOpacity style={styles.toolBarBtn} onPress={undoCallBack}>
               <Ionicons name="arrow-undo" size={24} color="rgba(0, 0, 0, 0.6)" />
               <Text style={styles.btnText}>Undo</Text>
@@ -57,9 +58,9 @@ const Toolbar = ({ undoCallBack, redoCallback,zoomCallback,drawCallback, isDraw 
               <Text style={styles.btnText}>Redo</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.toolBarBtn} onPress={redoCallback}>
+            <TouchableOpacity style={styles.toolBarBtn} onPress={()=>{}}>
               <Ionicons name="save" size={24} color="rgba(0, 0, 0, 0.6)" />
-              <Text style={styles.btnText}>save</Text>
+              <Text style={styles.btnText}>Save</Text>
             </TouchableOpacity>
 
             {/* <TouchableOpacity
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
     color: "black",
   },
   toolbarContainer: {
-    alignItems: "flex-end",
+    alignItems: "center",
     height: 50,
     justifyContent: "center",
   },
@@ -104,7 +105,6 @@ const styles = StyleSheet.create({
     height: 50,
     width:450,
     justifyContent: "center",
-    marginLeft:100,
     borderRadius: 10,
     backgroundColor: "white",
     flexDirection: "row",
@@ -120,8 +120,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     padding:2,
     borderRadius:10,
-    
-    
   },
   cancleBtn: {
     alignItems: "center",

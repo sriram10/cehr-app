@@ -1,29 +1,74 @@
 import { useNavigation } from "@react-navigation/native";
-import { Box, Text, Heading, HStack, } from "native-base";
-import React, { useState, useRef, useEffect } from "react";
-import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons,MaterialIcons,Entypo} from "@expo/vector-icons";
+
+import { Box, Text, Heading, HStack } from "native-base";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { View, Image, StyleSheet, TouchableOpacity,FlatList } from "react-native";
 import { responsiveWidth } from "react-native-responsive-dimensions";
 import { SketchCanvas } from "rn-perfect-sketch-canvas";
-import {PatientInformationCard,MeteDataCard,Toolbar,ZoomableNormal,SideBar,SideBarRight,GoBack} from "../components";
+import {PatientInformationCard,MeteDataCard,Toolbar,ZoomableNormal,SideBar,SideBarRight,GoBack,} from "../components";
 // ⚠️ recycle waring apper will chage in future
 import ChatBoxModel from "./../components/chatboxModel";
-import {dumyData} from "../constants"
+import { dumyData,images,COLORS} from "../constants";
 import DropDownPage from "../components/DropDownPage";
-import {KeyboardAwareFlatList} from "react-native-keyboard-aware-scroll-view"
+import Animated,{Layout,SlideInDown,SlideInRight,SlideInLeft,SlideInUp, SlideOutDown, SlideOutRight} from "react-native-reanimated"
+
+// import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
+
+const listData = [
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+  23, 24, 25, 26,
+];
+const thumbSpacing = 10;
+const thumbImageSize = 60;
 
 const MainProfile = () => {
   const [imageValue, setImageValue] = useState(4);
   const [isDraw, setIsDraw] = useState(true);
-  const { goBack } = useNavigation();
   const canvaRef = useRef(null);
+  const [isShowThumbList,setIsShowThumbList] = useState(false);
+  const [isScalling,setIsScalling] = useState(false);
+  const [scaleWidth,setScalWidth] = useState(70);
+  
+  // Thumb FlateList
+
+  const [active, setActive] = useState(0);
+
+  const setscalling = useCallback(()=>{
+    setIsScalling((v)=>{
+      return (!v)
+    });
+  },[])
+  const setterscalingwidth = useCallback(()=>{
+    setScalWidth((v)=>{
+      return ((v === 95)?70:95)
+    });
+  },[])
+
+
+  const thumListShow = ()=>{
+    setIsShowThumbList(true);
+  }
+
   useEffect(() => {
     canvaRef?.current?.reset();
   }, [imageValue]);
-  const Childcon = ({ canvaRef }) => {
+
+  const FullScale = ()=>{
+    return(
+      <TouchableOpacity style={[{width:30,height:30,backgroundColor:COLORS.secondaryColor15,position:'absolute',alignItems:'center',justifyContent:"center",borderRadius:10,right:15,top:15}]}
+      onPress={()=>{setscalling();setterscalingwidth()}}
+      >
+        <MaterialIcons name="crop-free" size={20} color={COLORS.secondaryColor60} />
+      </TouchableOpacity>
+    )
+  }
+  const Childcon = ({canvaRef }) => {
     return (
-      <View style={{ flex: 1 }}>
+      <Animated.View layout={Layout.duration(300)} style={{ width:responsiveWidth(scaleWidth),flex:1 }}>
         <Image
           source={dumyData.imagevaluearr[imageValue]}
+          // stretch for the page full view
           resizeMode={"stretch"}
           style={[{ width: "100%", height: "100%" }]}
         />
@@ -31,24 +76,33 @@ const MainProfile = () => {
           ref={canvaRef}
           strokeColor={"black"}
           strokeWidth={isDraw ? 3 : 0}
-          containerStyle={[styles.sketchContainer, StyleSheet.absoluteFill]}
+          // backgroundColor={"red"}
+        
+          containerStyle={[{flexGrow:1,width:responsiveWidth(scaleWidth)}, StyleSheet.absoluteFill]}
         />
         <View style={{}}>
           <ChatBoxModel />
         </View>
-      </View>
+        <FullScale/>
+      </Animated.View>
     );
   };
   return (
-    // <ScrollView style={{}}
-    
     <View style={styles.root}>
-      <Box p={4} pt={8}>
-        <Heading size={"md"} mt={4}>
-          Form 01 - Cataract 01
-          
-        </Heading>
-        
+      
+        <Text style={{textAlign:'center',color:'rgba(56, 55, 55, .8)',fontSize:20,fontWeight:"800",marginTop:40}}>
+        Form 01 - Cataract 01
+        </Text>
+        <View style={{ position:'absolute',top:45,left:20,zindex:2 }} >
+        {isScalling?
+        <TouchableOpacity onPress={()=>{setscalling();setterscalingwidth()}}>
+          <Entypo name="chevron-thin-left" size={20} color="black" />
+        </TouchableOpacity>
+        :<GoBack/>}
+      </View>
+      {(!isScalling)&&<Animated.View entering={SlideInUp}>
+      <Box p={4} pt={4}>
+      
         <HStack space={4} mt={4}>
           <MeteDataCard />
           <PatientInformationCard
@@ -59,9 +113,8 @@ const MainProfile = () => {
           />
         </HStack>
       </Box>
-      <View style={{paddingHorizontal:20}}>
-      <GoBack/>
-      </View>
+      
+      
       <View
         style={{
           height: 30,
@@ -90,45 +143,120 @@ const MainProfile = () => {
             isDraw={isDraw}
           />
         </View>
-      </View>
+      </View> 
+      </Animated.View>}
 
       <Box flex={1} style={{ flexDirection: "row", alignItems: "flex-start" }}>
-        <Box p={4} flex={1} shadow={2}>
+        <Box m={4} flex={1} shadow={2}>
           <ZoomableNormal
             ChildCon={<Childcon canvaRef={canvaRef} />}
             iszoomable={!isDraw}
+            widthPersentage={scaleWidth}
           />
         </Box>
-        <View>
-          <SideBarRight />
-        </View>
-        <View style={{ position: "absolute", top: 20 }}>
-          <SideBar />
-        </View>
+       {(!isScalling)&&<Animated.View entering={SlideInRight}>
+          <SideBarRight onPress={thumListShow} />
+        </Animated.View>
+        }
+        {(!isScalling)&&
+           <Animated.View entering={SlideInLeft.duration(500)} style={{ position: "absolute", top: -50 }}>
+           <SideBar />
+         </Animated.View>
+        }
+       
       </Box>
-      {/* <View style={styles.btnContainer}>
-        <TouchableOpacity
-          style={styles.outbtnStyle}
-          onPress={() => {
-            goBack();
-            canvaRef?.current?.reset();
+      <Animated.View layout={Layout.duration(300)}  style={[{flexDirection:"row",marginBottom:10,padding:15,height:0},(isShowThumbList && !isScalling)&& {height:100}]} >
+        <Box justifyContent={"center"} backgroundColor={"#BFDCEB"} rounded="sm">
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              width: 40,
+              padding: 10,
+              justifyContent: "center",
+            }}
+            onPress={() => {
+              // PriviousIndex();
+            }}
+          >
+            <Ionicons name={"ios-chevron-back"} size={20} color={"#0073AE"} />
+          </TouchableOpacity>
+        </Box>
+        {/* THUMB FLATLIST */}
+        <FlatList
+          horizontal
+          // bounces
+          // ref={thumbRef}
+          showsHorizontalScrollIndicator={false}
+          style={{ flex: 1, marginHorizontal: 20 }}
+          data={dumyData.dummyimagevaluearr}
+          renderItem={({ item, index }) => {
+            return (
+              <Box
+                key={index}
+                rounded="sm"
+                style={{
+                  marginRight: thumbSpacing,
+                  borderWidth: 1,
+                  borderColor: active == index ? "#0073AE" : "transparent",
+                }}
+              >
+                <TouchableOpacity
+                  // onPress={() => toplistScrolltoIndex(index)}
+                  onPress={() => setActive(index)}
+                  style={{ flex: 1 }}
+                >
+                  <Image
+                    source={item}
+                    style={{
+                      width: thumbImageSize,
+                      height: thumbImageSize,
+                      flex: 1,
+                      borderRadius: 5,
+                    }}
+                  />
+                </TouchableOpacity>
+              </Box>
+            );
           }}
-        >
-          <Text style={{ color: "#0073AE" }}>Cancel</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.btnStyle}
-          onPress={() => {
-            goBack();
-            canvaRef?.current?.reset();
-          }}
-        >
-          <Text style={styles.btnText}>Save</Text>
-        </TouchableOpacity>
-      </View> */}
+        ></FlatList>
+        <Box justifyContent={"center"} backgroundColor={"#BFDCEB"} rounded="sm">
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              width: 40,
+              padding: 10,
+              justifyContent: "center",
+            }}
+            onPress={() => {
+              // nextIndex();
+            }}
+          >
+            <Ionicons
+              name={"ios-chevron-forward"}
+              size={20}
+              color={"#0073AE"}
+            />
+          </TouchableOpacity>
+        </Box>
+      </Animated.View>
+      {isScalling && <Animated.View entering={SlideInDown} exiting={SlideOutDown.duration(500)} style={[styles.toolbarContainerbottom]}>
+          <Toolbar
+            undoCallBack={() => {
+              canvaRef?.current?.undo();
+            }}
+            redoCallback={() => {
+              canvaRef?.current?.redo();
+            }}
+            zoomCallback={() => {
+              setIsDraw(false);
+            }}
+            drawCallback={() => {
+              setIsDraw(true);
+            }}
+            isDraw={isDraw}
+          />
+        </Animated.View>}
     </View>
-  
-   
   );
 };
 
@@ -164,7 +292,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
-    // backgroundColor:"red",
     marginBottom: 50,
   },
 
@@ -215,6 +342,12 @@ const styles = StyleSheet.create({
     opacity: 0.9,
     marginLeft: 5,
   },
+  toolbarContainerbottom:{
+    marginBottom:30,
+    alignItems:'center',
+    justifyContent:"center",
+    // backgroundColor:"red",
+  }
 });
 
 export default MainProfile;

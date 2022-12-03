@@ -1,10 +1,12 @@
-import {StyleSheet,Text,View,Dimensions,ScrollView,TouchableOpacity,} from "react-native";
+import {StyleSheet,Text,View,Dimensions,TouchableOpacity,} from "react-native";
 import React, { useRef, useState } from "react";
 import { Entypo } from "@expo/vector-icons";
 import { useEffect } from "react";
-import Animated,{useSharedValue,withTiming,withSpring,useAnimatedStyle,interpolate,FadeIn,FadeInDown,Extrapolation,Transition,Layout} from "react-native-reanimated"
-const { width} = Dimensions.get("window");
-const SIDEBAR_WIDTH = width * 0.7;
+import Animated, {useSharedValue,withTiming,useAnimatedStyle,interpolate,FadeInDown,Extrapolation,Layout,} from "react-native-reanimated";
+import { SIZE } from "../constants";
+
+
+const SIDEBAR_WIDTH = SIZE.width * 0.7;
 const SideBar = () => {
   const dummyData = [
     "Medical History",
@@ -17,52 +19,52 @@ const SideBar = () => {
   ];
   const [index, setIndex] = useState();
   const [showLeftSideBard, setShowLeftSideBar] = useState(false);
+
   useEffect(() => {
     changeanimation();
   }, []);
+
   const animationvalue = useSharedValue(0);
+
   const changeanimation = () => {
     if (showLeftSideBard) {
-     animationvalue.value = withTiming(0)
+      animationvalue.value = withTiming(0);
     } else {
-        animationvalue.value = withTiming(1)
+      animationvalue.value = withTiming(1);
     }
     setShowLeftSideBar(!showLeftSideBard);
   };
+
   const animatedStyles = useAnimatedStyle(() => {
-    const translation = interpolate(animationvalue.value, [0, 1], [0, -SIDEBAR_WIDTH * 1.01], { extrapolateRight: Extrapolation.CLAMP });
+    const translation = interpolate(
+      animationvalue.value,
+      [0, 1],
+      [0, -SIDEBAR_WIDTH * 1.01],
+      { extrapolateRight: Extrapolation.CLAMP }
+    );
 
     return {
       transform: [{ translateX: translation }],
     };
   });
 
-const animatedStylesRotate = useAnimatedStyle(() => {
-    const arrowRotate = interpolate(animationvalue.value, [0, 1],[0, 180]);
-
+  const animatedStylesRotate = useAnimatedStyle(() => {
+    const arrowRotate = interpolate(animationvalue.value, [0, 1], [0, 180]);
     return {
-      transform: [{ rotate:`${arrowRotate}deg`}],
+      // error acuire when driectly use 180deg
+      transform: [{ rotate: `${arrowRotate}deg` }],
     };
   });
   return (
     <View style={styles.mainContainer}>
       {/* side bar */}
-      <Animated.View
-        style={[
-          styles.sidebarcon,
-          animatedStyles,
-          styles.shadow
-        ]}
-      >
+      <Animated.View style={[styles.sidebarcon, animatedStyles, styles.shadow]}>
         {/* inner cards */}
-        <Animated.View
-
-          style={{ width: "100%" }}
-        >
+        <Animated.View style={{ width: "100%" }}>
           {dummyData.map((e, _index) => {
             return (
               <SideCard
-               key={_index}
+                key={_index}
                 title={e}
                 cardIndex={_index + 1}
                 index={index}
@@ -103,9 +105,10 @@ const SideCard = ({ title, cardIndex, index, setIndex }) => {
   };
 
   return (
-    <Animated.View  style={[styles.sideCard,{overflow:'hidden'},styles.shadow]}
-    layout={Layout.duration(300)}
-    entering={FadeInDown}
+    <Animated.View
+      style={[styles.sideCard, { overflow: "hidden" }, styles.shadow]}
+      layout={Layout.duration(300)}
+      entering={FadeInDown}
     >
       <TouchableOpacity
         activeOpacity={0.9}
@@ -115,13 +118,7 @@ const SideCard = ({ title, cardIndex, index, setIndex }) => {
         ]}
         onPress={changevalue}
       >
-        <Text
-          style={[
-            styles.cardText,
-          ]}
-        >
-          {title}
-        </Text>
+        <Text style={[styles.cardText]}>{title}</Text>
         <View
           style={index === cardIndex && { transform: [{ rotate: "180deg" }] }}
         >
@@ -133,14 +130,16 @@ const SideCard = ({ title, cardIndex, index, setIndex }) => {
           />
         </View>
       </TouchableOpacity>
-      {index === cardIndex &&<View
-        style={{margin:20}}
-      >
-        <Text>
-        is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It 
-        
-        </Text>
-      </View>}
+      {index === cardIndex && (
+        <View style={{ margin: 20 }}>
+          <Text>
+            is simply dummy text of the printing and typesetting industry. Lorem
+            Ipsum has been the industry's standard dummy text ever since the
+            1500s, when an unknown printer took a galley of type and scrambled
+            it to make a type specimen book. It
+          </Text>
+        </View>
+      )}
     </Animated.View>
   );
 };
@@ -148,24 +147,18 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: "white",
-    
   },
   sidebarcon: {
     position: "absolute",
     // bottom:(height*.5) -(height*.6/2),
     width: SIDEBAR_WIDTH,
     paddingHorizontal: 10,
-    // height:,
     paddingVertical: 10,
-    backgroundColor:"rgba(255, 255, 255, 1)",
-    borderRadius:5,
+    backgroundColor: "rgba(255, 255, 255, 1)",
+    borderRadius: 5,
     alignItems: "center",
-    // borderWidth: StyleSheet.hairlineWidth,
-    // borderColor: "grey",
-    borderTopLeftRadius:0,
-    borderBottomLeftRadius:0
-
-    // justifyContent:'center'
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
   },
   sideCard: {
     flex: 1,
@@ -186,15 +179,15 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 15,
     borderRadius: 7,
-    right: -40,
-    width: 40,
+    right: -30,
+    width: 30,
     height: 90,
     backgroundColor: "rgba(0, 0, 0, .7)",
     alignItems: "center",
     justifyContent: "center",
-    borderTopLeftRadius:0,
-    borderBottomLeftRadius:0,
-    overflow:'hidden',
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
+    overflow: "hidden",
   },
   cardHeader: {
     flexDirection: "row",
@@ -204,14 +197,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  shadow:{
+
+  shadow: {
     shadowColor: "black",
-shadowOffset: {
-width: 2,
-height: 2,
-},
-shadowOpacity:  .2,
-shadowRadius: 2.7,
-elevation: 5
-  }
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 2.7,
+    elevation: 5,
+  },
 });

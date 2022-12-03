@@ -1,13 +1,13 @@
 import {StyleSheet,View,} from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import Animated, {useSharedValue,useAnimatedStyle,withTiming,useAnimatedReaction,} from "react-native-reanimated";
+import Animated, {useSharedValue,useAnimatedStyle,withTiming,useAnimatedReaction,Layout} from "react-native-reanimated";
 import { responsiveWidth } from 'react-native-responsive-dimensions';
-const sizew=(responsiveWidth(70)) ; //main container size 
-const sizeh=(responsiveWidth(70))*1.3 ; //main container size 
-const ZoomableNormal = ({ ChildCon,iszoomable}) => {
+//main container size 
+const ZoomableNormal = ({ ChildCon,iszoomable,widthPersentage}) => {
   // states
   // should change the value of the size=child container width and height
-  
+  const sizew=(responsiveWidth(widthPersentage)) ; //main container size 
+  const sizeh=(responsiveWidth(widthPersentage))*1.3 ; 
   const pinchManualActivation = useSharedValue(0);
   const contextScale = useSharedValue({ scale: 1 });
   const contextTrans = useSharedValue({ x: 0, y: 0 });
@@ -23,6 +23,11 @@ const ZoomableNormal = ({ ChildCon,iszoomable}) => {
     x: sizew / 2,
     y: sizeh / 2,
   };
+  
+  // full scaling Icon Component
+
+
+
   // for scalling validation
   useAnimatedReaction(
     () => {
@@ -127,7 +132,8 @@ const ZoomableNormal = ({ ChildCon,iszoomable}) => {
   const composed = Gesture.Simultaneous(_pinchGesture, _panGestutr);
 
   return (
-    <View style={styles.mainConatainer}>
+    <Animated.View layout={Layout.duration(300)} style={[styles.mainConatainer,{width: sizew,
+      height: sizew*1.3,}]}>
       <GestureDetector gesture={composed}>
         <Animated.View
           style={[
@@ -144,14 +150,13 @@ const ZoomableNormal = ({ ChildCon,iszoomable}) => {
           {ChildCon}
         </Animated.View>
       </GestureDetector>
-    </View>
+      
+    </Animated.View>
   );
 };
 export default ZoomableNormal;
 const styles = StyleSheet.create({
   mainConatainer: {
-    width: sizew,
-    height: sizew*1.3,
     overflow: "hidden",
     // backgroundColor:'red'
   },

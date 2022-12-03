@@ -22,6 +22,7 @@ import { useEffect } from 'react';
                         require("../assets/images/forms/PatientMedicalRecordForm.jpg") ]
 
   const DropDownPage = ({value,setValue}) => {
+    
     // const [value, setValue] = useState(null);
    useEffect(()=>{
     console.log(value)

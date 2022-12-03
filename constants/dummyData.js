@@ -30,6 +30,11 @@ const tableData = {
     ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
     ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
     ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
+    ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
+    ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
+    ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
+    ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
+    ["Wanda	Morrison", 34, "Female", "Cateract", "15:30mins", <ActionButton />],
   
   ],
 };
@@ -127,5 +132,18 @@ const imagevaluearr= [require("../assets/images/forms/ClinicalDoctorwhitepage.jp
   require("../assets/images/forms/PatientMedicalRecordContinuationForm.jpg"),
   require("../assets/images/forms/PatientMedicalRecordForm.jpg") ]
 
-const dumyData = { chartData, tableData, agendaEvents,imagevaluearr};
+  const dummyimagevaluearr= [require("../assets/images/forms/ClinicalDoctorwhitepage.jpg"),
+  require("../assets/images/forms/CASARecordForm.jpg"),
+  require("../assets/images/forms/ClinicalRefractiveAssessmentpage.jpg"),
+  require("../assets/images/forms/DFRPatientMedicalRecord.jpg"),
+  require("../assets/images/forms/PatientMedicalRecordContinuationForm.jpg"),
+  require("../assets/images/forms/PatientMedicalRecordForm.jpg"),
+  require("../assets/images/forms/ClinicalDoctorwhitepage.jpg"),
+  require("../assets/images/forms/CASARecordForm.jpg"),
+  require("../assets/images/forms/ClinicalRefractiveAssessmentpage.jpg"),
+  require("../assets/images/forms/DFRPatientMedicalRecord.jpg"),
+  require("../assets/images/forms/PatientMedicalRecordContinuationForm.jpg"),
+  require("../assets/images/forms/PatientMedicalRecordForm.jpg") ]
+  
+const dumyData = { chartData, tableData, agendaEvents,imagevaluearr,dummyimagevaluearr};
 export default dumyData;
