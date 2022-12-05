@@ -26,8 +26,6 @@ const ZoomableNormal = ({ ChildCon,iszoomable,widthPersentage}) => {
   
   // full scaling Icon Component
 
-
-
   // for scalling validation
   useAnimatedReaction(
     () => {

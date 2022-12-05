@@ -42,7 +42,6 @@ const Toolbar = ({ undoCallBack, redoCallback,zoomCallback,drawCallback, isDraw 
               <Ionicons name="md-crop-outline" size={24} color={(!isDraw)? "white":"black"}/>
               <Text style={[styles.btnText,(!isDraw)&&{ color:"white"}]}>Zoom</Text>
             </TouchableOpacity>
-
             <TouchableOpacity style={[styles.toolBarBtn,(isDraw)&&{ backgroundColor: COLORS.secondaryColor80}]} onPress={() => onClick({ callback: drawCallback, draw: true })}>
               <Ionicons name="pencil" size={24} color={(isDraw)? "white":"black"} />
               <Text style={[styles.btnText,(isDraw)&&{ color:"white"}]}>Draw</Text>

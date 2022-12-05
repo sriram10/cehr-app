@@ -25,7 +25,7 @@ import { useEffect } from 'react';
     
     // const [value, setValue] = useState(null);
    useEffect(()=>{
-    console.log(value)
+    // console.log(value)
    },[value]);
     return (
       <Dropdown
