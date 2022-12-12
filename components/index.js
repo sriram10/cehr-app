@@ -13,6 +13,8 @@ import ZoomableNormal from './ZoombaleNormal';
 import BtnIcons from './BtnIcons';
 import SideBar from './SideBar';
 import SideBarRight from './SidebarRight';
+import ClinicDropDown from './ClinicDropDown';
+import UrlConfigSheet from './UrlConfigSheet';
 
 
 
@@ -32,5 +34,7 @@ export {
   ZoomableNormal,
   SideBar,
   SideBarRight,
+  ClinicDropDown,
+  UrlConfigSheet
   
 };

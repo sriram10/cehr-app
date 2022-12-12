@@ -19,16 +19,14 @@ const LineChartcard = ({ data, width }) => {
   // const tomorrowDateString = `${today.getFullYear}-${today.getMonth+1}-${today.getDate}`
   return (
     <Box flex={2} rounded={"md"} bg="white">
-     
        {ismonth?<Calendar
-      
       markingType={'multi-dot'}
       markedDates={{
         [currentDateString]: {dots: [vacation, massage, workout]},
         '2022-12-04': {dots: [massage, workout]}
       }}
   onDayPress={day => {
-    console.log('selected day', day);
+    // console.log('selected day', day);
     setCurrentDate(day);
     setIsMonth(false)
   }}

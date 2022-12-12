@@ -35,7 +35,7 @@ const Details = () => {
 
   const toplistScrolltoIndex = (index) => {
     setActive(index);
-    console.log("index :", index);
+    // console.log("index :", index);
     topRef?.current?.scrollToOffset({
       offset: index * SIZE.width,
       animated: true,
@@ -56,7 +56,7 @@ const Details = () => {
   };
 
   const nextIndex = () => {
-    console.log(listData.length);
+    // console.log(listData.length);
     if (active < listData.length - 1) {
       toplistScrolltoIndex(active + 1);
     }

@@ -147,7 +147,7 @@ const Playback = ({ audiourl, sendername }) => {
           }}
           onValueChange={(e) => {
             if (e >= 0.99) {
-              console.log("completed");
+              // console.log("completed");
               PauseAudio().then(() => {
                 rePlayPositionchanger();
               });

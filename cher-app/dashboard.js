@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Box, ScrollView, Text, Heading, HStack, VStack } from "native-base";
 import { View, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Header, LineChartcard, MiniCard, AgendaCalendar } from "../components";
+import { Header, LineChartcard, MiniCard } from "../components";
 import { dumyData } from "../constants";
 import { responsiveWidth } from "react-native-responsive-dimensions";
 import { COLORS } from './../constants/theme';
@@ -42,7 +42,8 @@ const Dashboard = () => {
     <View style={styles.root}>
       <Header />
       <Box flex={1} p={4}>
-        <Heading size={"md"} mb={2}>
+        <Box backgroundColor={"white"} mb={4} p={4} pt={2} pb={2} borderRadius={5} shadow={2} >       
+         <Heading size={"md"} mb={2} color={"lightBlue.800"}>
           Welcome, Dr. John Doe
         </Heading>
         <HStack alignItems={"center"} mb={4}>
@@ -67,8 +68,9 @@ const Dashboard = () => {
             </Text>
           </Box>
         </HStack>
+        </Box>
 
-        <HStack pb={4} space={4} justifyContent="center">
+        <HStack pb={4} space={4} justifyContent="center" shadow={2}>
           <LineChartcard
             data={dumyData.chartData}
             width={responsiveWidth(45)}
@@ -91,7 +93,7 @@ const Dashboard = () => {
         <Heading size={"sm"} mb={2}>
           Your Next Patients
         </Heading>
-        <Box rounded={"md"}  flex={1}>
+        <Box rounded={"md"}  flex={1} borderRadius={5} shadow={2}>
           <VStack>
             <Box style={styles.tableHead}>
               {dumyData.tableData.head.map((d, i) => (

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
   import { StyleSheet } from 'react-native';
   import { Dropdown } from 'react-native-element-dropdown';
-  import {AntDesign} from "@expo/vector-icons";
-import { COLORS } from '../constants';
-import { useEffect } from 'react';
+
 
   const data = [
     { label: 'Patient Continuation Form', value: 4 },
@@ -14,19 +12,8 @@ import { useEffect } from 'react';
     { label: 'DFRPatient', value:3 },
    
   ];
-  const imagevalue = [require("../assets/images/forms/ClinicalDoctorwhitepage.jpg"),
-                        require("../assets/images/forms/CASARecordForm.jpg"),
-                        require("../assets/images/forms/ClinicalRefractiveAssessmentpage.jpg"),
-                        require("../assets/images/forms/DFRPatientMedicalRecord.jpg"),
-                        require("../assets/images/forms/PatientMedicalRecordContinuationForm.jpg"),
-                        require("../assets/images/forms/PatientMedicalRecordForm.jpg") ]
 
   const DropDownPage = ({value,setValue}) => {
-    
-    // const [value, setValue] = useState(null);
-   useEffect(()=>{
-    // console.log(value)
-   },[value]);
     return (
       <Dropdown
         style={styles.dropdown}

@@ -63,7 +63,7 @@ const Card = ({ title, cardId, index, setIndex,onPress}) => {
             style={{ width: "100%", padding: 30 }}
           >
             {dummyContentData.map((e, i) => {
-              console.log("index :",i)
+              // console.log("index :",i)
               return (
                 <Animated.View entering={FadeIn.delay(100*i+1)} key={i} style={styles.cardContent}>
                 

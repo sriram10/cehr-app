@@ -51,7 +51,8 @@ const MainProfile = () => {
 
   // effects
   useEffect(()=>{
-    // console.log(responsiveWidth(70))
+    canvaRef?.current?.isDrawToggle()
+    
   },[])
   // rendering function
   const setscalling = useCallback(() => {
@@ -118,7 +119,7 @@ const MainProfile = () => {
         <SketchCanvas
           ref={canvaRef}
           strokeColor={"black"}
-          strokeWidth={isDraw?3:0}
+          strokeWidth={3}
           containerStyle={[
             { flexGrow: 1, width: responsiveWidth(scaleWidth) },
             StyleSheet.absoluteFill,
@@ -191,11 +192,11 @@ const MainProfile = () => {
                   canvaRef?.current?.redo();
                 }}
                 zoomCallback={() => {
-                  // canvaRef?.current?.isZoomToggle()
+                  canvaRef?.current?.isZoomToggle()
                   setIsDraw(false);
                 }}
                 drawCallback={() => {
-                  // canvaRef?.current?.isDrawToggle()
+                  canvaRef?.current?.isDrawToggle()
                   setIsDraw(true);
                 }}
                 isDraw={isDraw}
@@ -322,9 +323,11 @@ const MainProfile = () => {
               canvaRef?.current?.redo();
             }}
             zoomCallback={() => {
+              canvaRef?.current?.isZoomToggle();
               setIsDraw(false);
             }}
             drawCallback={() => {
+              canvaRef?.current?.isDrawToggle();
               setIsDraw(true);
             }}
             isDraw={isDraw}

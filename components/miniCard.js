@@ -18,7 +18,7 @@ const MiniCard = ({ iconName, bgIconName, title, count }) => {
       <Box>
         <Ionicons name={iconName} color={"#939598"} size={20} />
         <Text color={"gray.600"}>{title}</Text>
-        <Heading mt={2} color={"blue.700"}>
+        <Heading mt={2} color={"lightBlue.600"}>
           {count}
         </Heading>
       </Box>
